@@ -11,17 +11,16 @@ import retrofit2.http.Path
 
 interface OmdbApi {
 
-    @GET("/?t=My%20Hero%20Academia&apikey=7b8c5d51")
-    suspend fun getPosts(@Path("subreddit") subreddit: String): ListingResponse
+    @GET("/?t={title}&Season={season}&Episode={episode}&apikey=7b8c5d51")
+    suspend fun getEpisode(@Path("title") title: String, @Path("season") season: String,
+                           @Path("episode") episode: String): OmdbListingResponse
 
-    class ListingResponse(val data: ListingData)
+    //for testing without season and episode
+    @GET("/?t={title}&apikey=7b8c5d51")
+    suspend fun getSeries(@Path("title") title: String): OmdbListingResponse
 
-    class ListingData(
-        val children: List<RedditChildrenResponse>,
-        val after: String?,
-        val before: String?
-    )
-    data class RedditChildrenResponse(val data: OmdbListing)
+
+    data class OmdbListingResponse(val data: OmdbListing)
 
     companion object {
         private fun buildGsonConverterFactory(): GsonConverterFactory {

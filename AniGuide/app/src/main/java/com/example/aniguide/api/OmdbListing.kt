@@ -44,4 +44,5 @@ data class OmdbListing (
     @SerializedName("imdbvotes")
     val imdbVotes: String,
     @SerializedName("imdbID")
-    val imdbID: String )
+    val imdbID: String
+)
