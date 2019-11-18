@@ -11,35 +11,55 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aniguide.R
+import com.example.aniguide.api.Episode
 
 class HomeFragment : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
-//    private lateinit var rowAdapter: RowListAdapter
+    private lateinit var viewModel: HomeViewModel
+    private lateinit var rowAdapter: RowListAdapter
 
-//    private fun initAdapter(root: View) {
-//
-//        val main = root.findViewById<RecyclerView>(R.id.showList)
-//        rowAdapter = RowListAdapter(homeViewModel)
-//
-//        main.adapter = rowAdapter
-//        main.layoutManager = LinearLayoutManager(context)
-//    }
+    companion object {
+        fun newInstance(): HomeFragment {
+            return HomeFragment()
+        }
+    }
 
+    fun myRestore() {
+
+    }
+
+    private fun submitEpisodes(Episode: List<Episode>, adapter: RowListAdapter) {
+
+        adapter.submitEpisodes(Episode)
+    }
+
+    private fun initAdapter(root: View) {
+
+        val main = root.findViewById<RecyclerView>(R.id.showList)
+        rowAdapter = RowListAdapter(viewModel)
+
+        main.adapter = rowAdapter
+        main.layoutManager = LinearLayoutManager(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
 
         val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
+        initAdapter(root)
 
-        homeViewModel.text.observe(this, Observer {
-            textView.text = it
+        viewModel.observeSeries().observe(this, Observer {
+            viewModel.refreshEpisodes()
         })
+
+        viewModel.observeEpisodes().observe(this, Observer {
+            submitEpisodes(it, rowAdapter)
+        })
+
         return root
     }
 }

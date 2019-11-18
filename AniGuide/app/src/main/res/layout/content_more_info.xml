@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".ui.MoreInfo"
+        tools:showIn="@layout/activity_more_info" >
+
+    <TextView
+            android:id="@+id/ep_title"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:paddingTop="10dp"
+            android:paddingStart="6dp"
+            android:paddingEnd="0dp"
+            android:paddingBottom="20dp" />
+
+    <FrameLayout
+            android:id="@+id/contentLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" >
+
+        <ImageView
+                android:id="@+id/ep_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="fitStart"
+                android:layout_margin="2dp" />
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/ep_desc"
+                android:layout_margin="2dp"
+                android:textSize="12sp"
+                android:padding="10dp"
+                android:scrollbars = "vertical" />
+
+    </FrameLayout>
+
+</LinearLayout>

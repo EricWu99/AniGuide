@@ -8,19 +8,19 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
-interface OmdbApi {
+interface TMDBApi {
 
-    @GET("/?t={title}&Season={season}&Episode={episode}&apikey=7b8c5d51")
-    suspend fun getEpisode(@Path("title") title: String, @Path("season") season: String,
-                           @Path("episode") episode: String): OmdbListingResponse
+    @GET ("/3/search/tv?api_key=ba626da3057b248f95ac15ff17f03268")
+    suspend fun searchShow(@Query("query") title: String): TMDBSearchListing
 
-    //for testing without season and episode
-    @GET("/?t={title}&apikey=7b8c5d51")
-    suspend fun getSeries(@Path("title") title: String): OmdbListingResponse
+    @GET("/3/tv/{id}/season/{season}?api_key=ba626da3057b248f95ac15ff17f03268")
+    suspend fun getSeason(@Path("id") id: String, @Path("season") season: String): TMDBSeasonListing
 
 
-    data class OmdbListingResponse(val data: OmdbListing)
+    data class TMDBSearchListing(val data: TMDBSearchMeta)
+    data class TMDBSeasonListing(val data: TMDBSeasonMeta)
 
     companion object {
         private fun buildGsonConverterFactory(): GsonConverterFactory {
@@ -28,11 +28,11 @@ interface OmdbApi {
             return GsonConverterFactory.create(gsonBuilder.create())
         }
         var httpurl = HttpUrl.Builder()
-            .scheme("http")
-            .host("www.omdbapi.com")
+            .scheme("https")
+            .host("api.themoviedb.org")
             .build()
-        fun create(): OmdbApi = create(httpurl)
-        private fun create(httpUrl: HttpUrl): OmdbApi {
+        fun create(): TMDBApi = create(httpurl)
+        private fun create(httpUrl: HttpUrl): TMDBApi {
 
             val client = OkHttpClient.Builder()
                 .addInterceptor(HttpLoggingInterceptor().apply {
@@ -44,7 +44,7 @@ interface OmdbApi {
                 .client(client)
                 .addConverterFactory(buildGsonConverterFactory())
                 .build()
-                .create(OmdbApi::class.java)
+                .create(TMDBApi::class.java)
         }
     }
 }

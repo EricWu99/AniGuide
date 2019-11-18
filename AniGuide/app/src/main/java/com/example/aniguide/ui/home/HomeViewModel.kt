@@ -1,13 +1,63 @@
 package com.example.aniguide.ui.home
 
-import androidx.lifecycle.LiveData
+import android.content.Context
+import android.content.Intent
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.aniguide.api.Episode
+import com.example.aniguide.api.TMDBApi
+import com.example.aniguide.api.SearchListingRepository
+import com.example.aniguide.ui.MoreInfo
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class HomeViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "Shows"
+    private val api = TMDBApi.create()
+    private val repo = SearchListingRepository(api)
+
+    private val series = MutableLiveData<String>().apply { value = "My+Hero+Academia" }
+    private val season = MutableLiveData<String>().apply { value = "1" }
+
+    private val episodes = MutableLiveData<List<Episode>>()
+
+    fun observeSeries(): MutableLiveData<String> {
+        return series
     }
-    val text: LiveData<String> = _text
+
+    fun observeEpisodes(): MutableLiveData<List<Episode>> {
+        return episodes
+    }
+
+    fun refreshEpisodes() = viewModelScope.launch(
+        context = viewModelScope.coroutineContext
+                + Dispatchers.IO) {
+
+        val id = repo.searchShow(series.value.toString())//.results[0].id
+        Log.d("XXX", "$id")
+
+        //episodes.postValue(repo.getSeason(season.value.toString(), series.value.toString()))
+    }
+
+    companion object {
+
+        const val titleKey = "titleKey"
+        const val imageKey = "imageKey"
+        const val descTextKey = "textKey"
+
+        fun showMoreInfo(context: Context, episode: Episode) {
+
+            val moreInfoIntent = Intent(context, MoreInfo::class.java)
+
+            moreInfoIntent.apply {
+                putExtra(titleKey, episode.name)
+                putExtra(imageKey, episode.still_path)
+                putExtra(descTextKey, episode.overview)
+            }
+            context.startActivity(moreInfoIntent)
+
+        }
+    }
 }

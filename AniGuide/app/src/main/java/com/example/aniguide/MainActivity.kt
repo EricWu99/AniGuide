@@ -15,25 +15,25 @@ import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.fragment.app.FragmentTransaction
+import com.example.aniguide.ui.home.HomeFragment
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var homeFragment: HomeFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val fab: FloatingActionButton = findViewById(R.id.fab)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
@@ -44,6 +44,31 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+//        homeFragment = HomeFragment.newInstance()
+//        initBackStack()
+//        initHomeFragment()
+
+    }
+
+    private fun initHomeFragment() {
+        supportFragmentManager
+            .beginTransaction()
+            // No back stack for home
+            .add(R.id.nav_host_fragment, homeFragment)
+            // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            .commit()
+    }
+
+    private fun initBackStack() {
+        supportFragmentManager.apply {
+            addOnBackStackChangedListener {
+                if (backStackEntryCount == 0) {
+                    homeFragment.myRestore()
+                }
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
