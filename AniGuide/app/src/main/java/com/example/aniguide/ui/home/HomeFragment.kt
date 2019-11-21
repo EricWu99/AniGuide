@@ -59,7 +59,6 @@ class HomeFragment : Fragment() {
         viewModel.observeEpisodes().observe(this, Observer {
             submitEpisodes(it, rowAdapter)
         })
-
         return root
     }
 }

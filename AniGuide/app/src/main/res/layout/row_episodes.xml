@@ -7,36 +7,42 @@
         android:clickable="true"
         android:layout_margin="8dp"
         android:background="?android:attr/selectableItemBackground">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
         <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_vertical|start"
-                android:id="@+id/ep_image"
-                />
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical|start"
+            android:scaleType="fitXY"
+            android:id="@+id/ep_image"
+            android:paddingStart="10dp"/>
+
         <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="10dp" >
+
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:layout_gravity="center_vertical"
+                android:textSize="16sp"
+                android:id="@+id/ep_title" />
             <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:textSize="16sp"
-                    android:id="@+id/ep_title"
-                    />
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:textSize="12sp"
-                    android:id="@+id/ep_text"
-                    />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textSize="12sp"
+                android:id="@+id/ep_text" />
+
         </LinearLayout>
+
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>

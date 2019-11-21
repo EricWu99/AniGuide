@@ -10,12 +10,12 @@ class SearchListingRepository(private val TMDBApi: TMDBApi) {
 //        return TMDBApi.searchShow(title).data.results[0].id
 //    }
 
-    suspend fun searchShow(title: String): TMDBSearchMeta {
-        return TMDBApi.searchShow(title)
+    suspend fun getSeriesID(title: String): String {
+        return TMDBApi.searchShow(title).results[0].id.toString()
     }
 
-    suspend fun getSeason(id: String, title: String, season: String): List<Episode>{
-        return TMDBApi.getSeason(id ,season).episode
+    suspend fun getSeason(title: String, season: String): List<Episode>{
+        return TMDBApi.getSeason(getSeriesID(title),season).episode
     }
 
 }

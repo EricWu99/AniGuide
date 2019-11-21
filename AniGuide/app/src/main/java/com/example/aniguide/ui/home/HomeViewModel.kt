@@ -34,11 +34,7 @@ class HomeViewModel : ViewModel() {
     fun refreshEpisodes() = viewModelScope.launch(
         context = viewModelScope.coroutineContext
                 + Dispatchers.IO) {
-
-        //val id = repo.getSeason("65930","65930","4")
-        //Log.d("XXX", "$id")
-
-        episodes.postValue(repo.getSeason("65930", "", "1"))
+        episodes.postValue(repo.getSeason(series.value.toString(),season.value.toString()))
     }
 
     companion object {
