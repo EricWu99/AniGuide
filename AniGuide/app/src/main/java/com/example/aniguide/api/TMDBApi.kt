@@ -13,14 +13,11 @@ import retrofit2.http.Query
 interface TMDBApi {
 
     @GET ("/3/search/tv?api_key=ba626da3057b248f95ac15ff17f03268")
-    suspend fun searchShow(@Query("query") title: String): TMDBSearchListing
+    suspend fun searchShow(@Query("query") title: String): TMDBSearchMeta
 
     @GET("/3/tv/{id}/season/{season}?api_key=ba626da3057b248f95ac15ff17f03268")
-    suspend fun getSeason(@Path("id") id: String, @Path("season") season: String): TMDBSeasonListing
-
-
-    data class TMDBSearchListing(val data: TMDBSearchMeta)
-    data class TMDBSeasonListing(val data: TMDBSeasonMeta)
+    //https://api.themoviedb.org/3/tv/65930/season/4?api_key=ba626da3057b248f95ac15ff17f03268
+    suspend fun getSeason(@Path("id") id: String, @Path("season") season: String): TMDBSeasonMeta
 
     companion object {
         private fun buildGsonConverterFactory(): GsonConverterFactory {

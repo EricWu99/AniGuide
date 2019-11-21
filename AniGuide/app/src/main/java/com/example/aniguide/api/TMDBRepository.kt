@@ -1,6 +1,7 @@
 package com.example.aniguide.api
 
 import android.util.Log
+import java.net.URL
 
 class SearchListingRepository(private val TMDBApi: TMDBApi) {
     //val gson = Gson()
@@ -10,11 +11,11 @@ class SearchListingRepository(private val TMDBApi: TMDBApi) {
 //    }
 
     suspend fun searchShow(title: String): TMDBSearchMeta {
-        return TMDBApi.searchShow(title).data
+        return TMDBApi.searchShow(title)
     }
 
-    suspend fun getSeason(season: String, title: String): List<Episode> {
-        return TMDBApi.getSeason((searchShow(title)).toString(),season).data.Episode
+    suspend fun getSeason(id: String, title: String, season: String): List<Episode>{
+        return TMDBApi.getSeason(id ,season).episode
     }
 
 }

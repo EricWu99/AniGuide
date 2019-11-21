@@ -35,10 +35,10 @@ class HomeViewModel : ViewModel() {
         context = viewModelScope.coroutineContext
                 + Dispatchers.IO) {
 
-        val id = repo.searchShow(series.value.toString())//.results[0].id
-        Log.d("XXX", "$id")
+        //val id = repo.getSeason("65930","65930","4")
+        //Log.d("XXX", "$id")
 
-        //episodes.postValue(repo.getSeason(season.value.toString(), series.value.toString()))
+        episodes.postValue(repo.getSeason("65930", "", "1"))
     }
 
     companion object {

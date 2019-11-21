@@ -28,7 +28,7 @@ class RowListAdapter(private val viewModel: HomeViewModel)
         fun bind(item: Episode) {
 
             title.text = item.name
-            Glide.glideFetch(item.still_path, item.still_path, image)
+            Glide.glideFetch(item.still_path!!, item.still_path!!, image)
             descr.text = item.overview
 
             title.setOnClickListener {
