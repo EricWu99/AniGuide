@@ -26,7 +26,7 @@ data class Episode (
     @SerializedName("still_path") val still_path : String?,
     @SerializedName("vote_average") val vote_average : Float,
     @SerializedName("vote_count") val vote_count : Int,
-    @SerializedName("crew") val crew : List<String>,
+    @SerializedName("crew") val crew : List<Crew>,
     @SerializedName("guest_stars") val guest_stars : List<Crew>
 )
 

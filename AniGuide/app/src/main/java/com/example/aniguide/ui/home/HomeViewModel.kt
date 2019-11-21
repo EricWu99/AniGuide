@@ -18,7 +18,7 @@ class HomeViewModel : ViewModel() {
     private val api = TMDBApi.create()
     private val repo = SearchListingRepository(api)
 
-    private val series = MutableLiveData<String>().apply { value = "My+Hero+Academia" }
+    private val series = MutableLiveData<String>().apply { value = "Naruto" }
     private val season = MutableLiveData<String>().apply { value = "1" }
 
     private val episodes = MutableLiveData<List<Episode>>()
