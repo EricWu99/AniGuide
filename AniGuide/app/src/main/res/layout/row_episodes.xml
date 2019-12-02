@@ -11,7 +11,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary" >
 
         <ImageView
             android:layout_width="80dp"
@@ -19,7 +20,7 @@
             android:layout_gravity="center_vertical|start"
             android:scaleType="fitXY"
             android:id="@+id/ep_image"
-            android:paddingStart="10dp"/>
+            android:paddingStart="10dp" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -29,17 +30,20 @@
             android:paddingStart="10dp" >
 
             <TextView
+                android:id="@+id/ep_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:textSize="16sp"
-                android:id="@+id/ep_title" />
+                android:textColor="@android:color/white" />
             <TextView
+                android:id="@+id/ep_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:textSize="12sp"
-                android:id="@+id/ep_text" />
+                android:textColor="@android:color/white"
+                android:maxLines="3" />
 
         </LinearLayout>
 

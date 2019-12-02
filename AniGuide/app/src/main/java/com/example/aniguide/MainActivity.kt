@@ -1,8 +1,6 @@
 package com.example.aniguide
 
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -16,21 +14,16 @@ import android.view.Menu
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.ActionBar
-import androidx.fragment.app.FragmentTransaction
-import com.example.aniguide.ui.home.HomeFragment
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var homeFragment: HomeFragment
 
     fun initActionBar(actionBar: ActionBar) {
         // Disable the default and enable the custom
         actionBar.setDisplayShowTitleEnabled(false)
         actionBar.setDisplayShowCustomEnabled(true)
-        val customView: View =
-            layoutInflater.inflate(R.layout.action_bar, null)
-        // Apply the custom view
+        val customView: View = layoutInflater.inflate(R.layout.action_bar, null)
         actionBar.customView = customView
     }
 
@@ -51,37 +44,12 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
-                R.id.nav_tools, R.id.nav_share, R.id.nav_send
+                R.id.nav_home, R.id.nav_fall, R.id.nav_winter, R.id.nav_spring, R.id.nav_summer,
+                R.id.nav_share, R.id.nav_send
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-//        homeFragment = HomeFragment.newInstance()
-//        initBackStack()
-//        initHomeFragment()
-
-    }
-
-    private fun initHomeFragment() {
-        supportFragmentManager
-            .beginTransaction()
-            // No back stack for home
-            .add(R.id.nav_host_fragment, homeFragment)
-            // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-            .commit()
-    }
-
-    private fun initBackStack() {
-        supportFragmentManager.apply {
-            addOnBackStackChangedListener {
-                if (backStackEntryCount == 0) {
-                    homeFragment.myRestore()
-                }
-            }
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -94,6 +62,8 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
+
 
     fun hideKeyboard() {
         val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager

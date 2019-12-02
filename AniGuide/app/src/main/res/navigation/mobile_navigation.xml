@@ -8,26 +8,32 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="com.example.aniguide.ui.home.HomeFragment"
-        android:label="Fall"
+        android:label="All Series"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.aniguide.ui.gallery.GalleryFragment"
+        android:id="@+id/nav_fall"
+        android:name="com.example.aniguide.ui.fall.FallFragment"
+        android:label="Fall"
+        tools:layout="@layout/fragment_fall" />
+
+    <fragment
+        android:id="@+id/nav_winter"
+        android:name="com.example.aniguide.ui.winter.WinterFragment"
         android:label="Winter"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_winter" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.aniguide.ui.slideshow.SlideshowFragment"
+        android:id="@+id/nav_spring"
+        android:name="com.example.aniguide.ui.spring.SpringFragment"
         android:label="Spring"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_spring" />
 
     <fragment
-        android:id="@+id/nav_tools"
-        android:name="com.example.aniguide.ui.tools.ToolsFragment"
+        android:id="@+id/nav_summer"
+        android:name="com.example.aniguide.ui.summer.SummerFragment"
         android:label="Summer"
-        tools:layout="@layout/fragment_tools" />
+        tools:layout="@layout/fragment_summer" />
 
     <fragment
         android:id="@+id/nav_share"

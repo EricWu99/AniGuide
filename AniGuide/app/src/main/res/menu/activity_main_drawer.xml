@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view">
+    tools:showIn="navigation_view" >
 
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="All Series" />
+        <item
+            android:id="@+id/nav_fall"
             android:icon="@drawable/ic_grain_black_24dp"
             android:title="Fall" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_winter"
             android:icon="@drawable/ic_ac_unit_black_24dp"
             android:title="Winter" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_spring"
             android:icon="@drawable/ic_local_florist_black_24dp"
             android:title="Spring" />
         <item
-            android:id="@+id/nav_tools"
+            android:id="@+id/nav_summer"
             android:icon="@drawable/ic_wb_sunny_black_24dp"
             android:title="Summer" />
     </group>

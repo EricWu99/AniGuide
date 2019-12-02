@@ -9,7 +9,9 @@ import androidx.appcompat.widget.Toolbar
 import com.example.aniguide.R
 import com.example.aniguide.glide.Glide
 import com.example.aniguide.ui.home.HomeViewModel
+import kotlinx.android.synthetic.main.activity_more_info.*
 import kotlinx.android.synthetic.main.content_more_info.*
+import kotlinx.android.synthetic.main.more_info_bar.*
 
 class MoreInfo : AppCompatActivity() {
 
@@ -17,9 +19,7 @@ class MoreInfo : AppCompatActivity() {
         // Disable the default and enable the custom
         actionBar.setDisplayShowTitleEnabled(false)
         actionBar.setDisplayShowCustomEnabled(true)
-        val customView: View =
-            layoutInflater.inflate(R.layout.more_info_bar, null)
-        // Apply the custom view
+        val customView: View = layoutInflater.inflate(R.layout.more_info_bar, null)
         actionBar.customView = customView
     }
 
@@ -27,24 +27,38 @@ class MoreInfo : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_more_info)
 
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.let{
             initActionBar(it)
         }
 
-        val title = intent.getStringExtra(HomeViewModel.titleKey)
+        //Set the episode number as the action bar title
+        val epNumber = intent.getIntExtra(HomeViewModel.ep_num_key, 0)
+        episodeTitle.text = "Episode $epNumber"
 
-        ep_title.text = title
+        //Display the name of the episode
+        ep_name.text = intent.getStringExtra(HomeViewModel.name_key)
 
-        val imageUrl = intent.getStringExtra(HomeViewModel.imageKey)
+        //Display the image associated with the episode
+        val imageUrl = intent.getStringExtra(HomeViewModel.still_path_key)
         Glide.glideFetch("https://image.tmdb.org/t/p/w500$imageUrl",
-            "https://image.tmdb.org/t/p/w500$imageUrl", ep_image)
+            "https://image.tmdb.org/t/p/w500$imageUrl", ep_still)
 
-        ep_desc.text = intent.getStringExtra(HomeViewModel.descTextKey)
-        ep_desc.movementMethod = ScrollingMovementMethod()
+        //Display the overview text for the episode
+        ep_overview.text = intent.getStringExtra(HomeViewModel.overview_key)
+        ep_overview.movementMethod = ScrollingMovementMethod()
+
+        //Display the air date and vote average for the episode
+        ep_air_date.text = "Aired on ${intent.getStringExtra(HomeViewModel.air_date_key)}"
+        ep_vote_average.text = "Voted ${intent.getFloatExtra(HomeViewModel.vote_avg_key, 0f)}/10.0" +
+                " by ${intent.getIntExtra(HomeViewModel.vote_count_key, 0)} users"
+
     }
 
+    fun backButton(view: View) {
+
+        finish()
+    }
     override fun onBackPressed() {
 
         finish()

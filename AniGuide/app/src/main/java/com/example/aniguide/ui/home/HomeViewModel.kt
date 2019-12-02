@@ -18,10 +18,17 @@ class HomeViewModel : ViewModel() {
     private val api = TMDBApi.create()
     private val repo = SearchListingRepository(api)
 
-    private val series = MutableLiveData<String>().apply { value = "Naruto" }
+    private val series = MutableLiveData<String>().apply { value = "Boruto" }
     private val season = MutableLiveData<String>().apply { value = "1" }
 
     private val episodes = MutableLiveData<List<Episode>>()
+
+    private val searchTerm = MutableLiveData<String>()
+
+    fun updateSearchTerm(value: String)
+    {
+        searchTerm.postValue(value)
+    }
 
     fun observeSeries(): MutableLiveData<String> {
         return series
@@ -39,18 +46,26 @@ class HomeViewModel : ViewModel() {
 
     companion object {
 
-        const val titleKey = "titleKey"
-        const val imageKey = "imageKey"
-        const val descTextKey = "textKey"
+        const val ep_num_key = "ep_number_key"
+        const val name_key = "name_key"
+        const val still_path_key = "still_path_key"
+        const val overview_key = "overview_key"
+        const val air_date_key = "air_data_key"
+        const val vote_avg_key = "vote_avg_key"
+        const val vote_count_key = "vote_count_key"
 
-        fun showMoreInfo(context: Context, episode: Episode) {
+        fun showMoreInfo(context: Context, ep: Episode) {
 
             val moreInfoIntent = Intent(context, MoreInfo::class.java)
 
             moreInfoIntent.apply {
-                putExtra(titleKey, episode.name)
-                putExtra(imageKey, episode.still_path)
-                putExtra(descTextKey, episode.overview)
+                putExtra(ep_num_key, ep.episode_number)
+                putExtra(name_key, ep.name)
+                putExtra(still_path_key, ep.still_path)
+                putExtra(overview_key, ep.overview)
+                putExtra(air_date_key, ep.air_date)
+                putExtra(vote_avg_key, ep.vote_average)
+                putExtra(vote_count_key, ep.vote_count)
             }
             context.startActivity(moreInfoIntent)
 
