@@ -90,6 +90,10 @@ class HomeFragment : Fragment() {
         })
 
         viewModel.observeEpisodes().observe(this, Observer {
+            viewModel.observeSearchEpisodes(it)
+        })
+
+        viewModel.getSearchEpisodes().observe(this, Observer {
             submitEpisodes(it, rowAdapter)
         })
         return root

@@ -29,6 +29,12 @@ data class Episode (
     @SerializedName("crew") val crew : List<Crew>,
     @SerializedName("guest_stars") val guest_stars : List<Crew>
 )
+{
+    fun getEpisodeFields(): String {
+
+        return "$name $overview"
+    }
+}
 
 data class Crew(
     @SerializedName("id") val id : Int,

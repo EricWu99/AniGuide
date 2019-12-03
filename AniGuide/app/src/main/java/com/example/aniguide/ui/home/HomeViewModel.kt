@@ -3,9 +3,7 @@ package com.example.aniguide.ui.home
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.aniguide.api.Episode
 import com.example.aniguide.api.TMDBApi
 import com.example.aniguide.api.SearchListingRepository
@@ -21,13 +19,36 @@ class HomeViewModel : ViewModel() {
     private val series = MutableLiveData<String>().apply { value = "Boruto" }
     private val season = MutableLiveData<String>().apply { value = "1" }
 
-    private val episodes = MutableLiveData<List<Episode>>()
+    private val episodes = MutableLiveData<List<Episode>>().apply { value = ArrayList() }
 
-    private val searchTerm = MutableLiveData<String>()
+    private val searchTerm = MutableLiveData<String?>().apply { value = "" }
+    private val searchEpisodes = MediatorLiveData<List<Episode>>()
+
+    init {
+        searchEpisodes.addSource(searchTerm) {
+            searchEpisodes.value = filterEpisodes(episodes.value!!)
+        }
+    }
 
     fun updateSearchTerm(value: String)
     {
         searchTerm.postValue(value)
+    }
+
+    private fun filterEpisodes(list: List<Episode>): List<Episode>
+    {
+        return list.filter { it.getEpisodeFields().contains(searchTerm.value!!, ignoreCase = true)}
+    }
+
+    fun observeSearchEpisodes(list: List<Episode>): LiveData<List<Episode>>
+    {
+        searchEpisodes.value = filterEpisodes(list)
+        return searchEpisodes
+    }
+
+    fun getSearchEpisodes(): LiveData<List<Episode>>
+    {
+        return searchEpisodes
     }
 
     fun observeSeries(): MutableLiveData<String> {
