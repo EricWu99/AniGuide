@@ -1,20 +1,19 @@
-package com.example.aniguide.ui.home
+package com.example.aniguide.ui.tmdb_ep
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import androidx.lifecycle.*
-import com.example.aniguide.api.Episode
-import com.example.aniguide.api.TMDBApi
-import com.example.aniguide.api.SearchListingRepository
+import com.example.aniguide.tmdb_api.Episode
+import com.example.aniguide.tmdb_api.TMDBApi
+import com.example.aniguide.tmdb_api.TMDBRepository
 import com.example.aniguide.ui.MoreInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class HomeViewModel : ViewModel() {
+class EpisodeViewModel : ViewModel() {
 
     private val api = TMDBApi.create()
-    private val repo = SearchListingRepository(api)
+    private val repo = TMDBRepository(api)
 
     private val series = MutableLiveData<String>().apply { value = "Boruto" }
     private val season = MutableLiveData<String>().apply { value = "1" }

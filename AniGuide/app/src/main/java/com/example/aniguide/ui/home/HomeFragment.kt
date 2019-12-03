@@ -1,7 +1,6 @@
 package com.example.aniguide.ui.home
 
 import android.os.Bundle
-import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,58 +15,38 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.aniguide.MainActivity
 import com.example.aniguide.R
-import com.example.aniguide.api.Episode
-import kotlinx.android.synthetic.main.action_bar.*
+import com.example.aniguide.kitsu_api.Data
+import com.example.aniguide.tmdb_api.Episode
+import com.example.aniguide.ui.ShowListAdapter
+import com.example.aniguide.ui.ShowViewModel
+import com.example.aniguide.ui.tmdb_ep.EpisodeListAdapter
 
 class HomeFragment : Fragment() {
 
-    private lateinit var viewModel: HomeViewModel
-    private lateinit var rowAdapter: RowListAdapter
+    private lateinit var viewModel: ShowViewModel
+    private lateinit var showAdapter: ShowListAdapter
 
-    companion object {
-        fun newInstance(): HomeFragment {
-            return HomeFragment()
-        }
-    }
+    private fun submitShows(shows: List<Data>, adapter: ShowListAdapter) {
 
-    fun myRestore() {
-
-    }
-
-    private fun submitEpisodes(Episode: List<Episode>, adapter: RowListAdapter) {
-
-        adapter.submitEpisodes(Episode)
+        adapter.submitShows(shows)
     }
 
     private fun initAdapter(root: View) {
 
-        val main = root.findViewById<RecyclerView>(R.id.showList)
-        rowAdapter = RowListAdapter(viewModel)
+        val main = root.findViewById<RecyclerView>(R.id.fallShowList)
+        showAdapter = ShowListAdapter(viewModel)
 
-        main.adapter = rowAdapter
+        main.adapter = showAdapter
         main.layoutManager = LinearLayoutManager(context)
     }
 
     private fun initSwipeLayout(root: View) {
 
-        val swipe = root.findViewById<SwipeRefreshLayout>(R.id.swipeRefreshLayout)
+        val swipe = root.findViewById<SwipeRefreshLayout>(R.id.fallSwipeRefreshLayout)
         swipe.setOnRefreshListener {
 
-            viewModel.refreshEpisodes()
+            viewModel.refreshAllShows()
             swipe.isRefreshing = false
-        }
-    }
-
-    private fun setActionTitle(value: String)
-    {
-        activity?.findViewById<TextView>(R.id.actionTitle)?.text = value.replace("+", " ")
-    }
-
-    private fun enableSearchFunction() {
-
-        activity?.findViewById<EditText>(R.id.actionSearch)?.addTextChangedListener {
-            viewModel.updateSearchTerm(it.toString())
-            if(it.toString() == "") (activity as MainActivity).hideKeyboard()
         }
     }
 
@@ -76,26 +55,18 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
 
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
+        viewModel = ViewModelProviders.of(this).get(ShowViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_fall, container, false)
         initAdapter(root)
         initSwipeLayout(root)
 
-        setActionTitle(viewModel.observeSeries().value!!)
-        enableSearchFunction()
+        viewModel.refreshAllShows()
 
-        viewModel.observeSeries().observe(this, Observer {
-            viewModel.refreshEpisodes()
+        viewModel.observeShows().observe(this, Observer {
+            submitShows(it, showAdapter)
         })
 
-        viewModel.observeEpisodes().observe(this, Observer {
-            viewModel.observeSearchEpisodes(it)
-        })
-
-        viewModel.getSearchEpisodes().observe(this, Observer {
-            submitEpisodes(it, rowAdapter)
-        })
         return root
     }
 }

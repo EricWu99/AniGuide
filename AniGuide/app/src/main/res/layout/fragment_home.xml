@@ -14,7 +14,7 @@
             android:id="@+id/showList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/black" />
+            android:background="@android:color/darker_gray" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

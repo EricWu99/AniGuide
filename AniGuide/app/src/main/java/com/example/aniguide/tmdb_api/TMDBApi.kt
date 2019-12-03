@@ -1,4 +1,4 @@
-package com.example.aniguide.api
+package com.example.aniguide.tmdb_api
 
 import com.google.gson.GsonBuilder
 import okhttp3.HttpUrl

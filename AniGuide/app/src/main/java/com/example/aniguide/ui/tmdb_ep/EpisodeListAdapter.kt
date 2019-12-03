@@ -1,4 +1,4 @@
-package com.example.aniguide.ui.home
+package com.example.aniguide.ui.tmdb_ep
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,12 +9,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aniguide.R
-import com.example.aniguide.api.Episode
+import com.example.aniguide.tmdb_api.Episode
 import com.example.aniguide.glide.Glide
 
 
-class RowListAdapter(private val viewModel: HomeViewModel)
-    : ListAdapter<Episode, RowListAdapter.VH>(TMDB_Diff()) {
+class EpisodeListAdapter(private val viewModel: EpisodeViewModel)
+    : ListAdapter<Episode, EpisodeListAdapter.VH>(
+    TMDB_Diff()
+) {
 
     private var episodes = listOf<Episode>()
 
@@ -33,7 +35,10 @@ class RowListAdapter(private val viewModel: HomeViewModel)
                 "https://image.tmdb.org/t/p/w500${item.still_path}", image)
 
             title.setOnClickListener {
-                HomeViewModel.showMoreInfo(it.context, item)
+                EpisodeViewModel.showMoreInfo(
+                    it.context,
+                    item
+                )
             }
         }
     }
