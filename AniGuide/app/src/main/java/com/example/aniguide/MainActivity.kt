@@ -14,6 +14,9 @@ import android.view.Menu
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.ActionBar
+import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.fragment.NavHostFragment
+import com.example.aniguide.ui.home.HomeFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,6 +41,31 @@ class MainActivity : AppCompatActivity() {
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
+
+//        navView.setNavigationItemSelectedListener { menuItem ->
+//
+//            menuItem.isChecked = true
+//
+//            when(menuItem.itemId) {
+//
+//                R.id.nav_home -> {
+//                    supportFragmentManager
+//                        .beginTransaction()
+//                        .replace(R.id.container, HomeFragment())
+//                        .commit()
+//                }
+//            }
+//            false
+//        }
+//
+//        supportFragmentManager
+//            .beginTransaction()
+//            // No back stack for home
+//            .add(R.id.container, HomeFragment())
+//            // TRANSIT_FRAGMENT_FADE calls for the Fragment to fade away
+//            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+//            .commit()
+
         val navController = findNavController(R.id.nav_host_fragment)
 
         // Passing each menu ID as a set of Ids because each
@@ -45,11 +73,16 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_home, R.id.nav_fall, R.id.nav_winter, R.id.nav_spring, R.id.nav_summer,
-                R.id.nav_share, R.id.nav_send
+                R.id.nav_share, R.id.nav_send, R.id.epLayout
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    fun test()
+    {
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

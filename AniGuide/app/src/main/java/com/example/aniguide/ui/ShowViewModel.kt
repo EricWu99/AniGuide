@@ -20,6 +20,7 @@ class ShowViewModel : ViewModel() {
     private val year = MutableLiveData<String>().apply { value = "2019" }
     private val offset = MutableLiveData<Int>().apply { value = 20 }
 
+    private val selectedShow = MutableLiveData<String>()
     private val shows = MutableLiveData<List<Data>>().apply { value = ArrayList() }
 
     fun observeShows(): MutableLiveData<List<Data>> {
@@ -29,6 +30,16 @@ class ShowViewModel : ViewModel() {
     fun updateSeason(value: String)
     {
         season.value = value
+    }
+
+    fun getSelectedShow(): String
+    {
+        return selectedShow.value!!
+    }
+
+    fun setSelectedShow(value: String)
+    {
+        selectedShow.value = value
     }
 
     fun refreshSeasonalShows() = viewModelScope.launch(
@@ -42,4 +53,5 @@ class ShowViewModel : ViewModel() {
                 + Dispatchers.IO) {
         shows.postValue(repo.getAllShows(year.value!!, offset.value!!))
     }
+
 }

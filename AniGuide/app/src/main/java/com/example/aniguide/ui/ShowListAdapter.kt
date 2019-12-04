@@ -5,19 +5,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.aniguide.MainActivity
 import com.example.aniguide.R
 import com.example.aniguide.tmdb_api.Episode
 import com.example.aniguide.glide.Glide
 import com.example.aniguide.kitsu_api.Data
+import com.example.aniguide.ui.tmdb_ep.EpisodeViewModel
 
 
-class ShowListAdapter(private val viewModel: ShowViewModel)
-    : ListAdapter<Episode, ShowListAdapter.VH>(
-    TMDB_Diff()
-) {
+class ShowListAdapter(private val viewModel: ShowViewModel,
+                      private val openEpisodeList: ()->Unit) : ListAdapter<Episode, ShowListAdapter.VH>( TMDB_Diff() ) {
 
     private var shows = listOf<Data>()
 
@@ -30,16 +32,13 @@ class ShowListAdapter(private val viewModel: ShowViewModel)
 
         fun bind(item: Data) {
 
-            if(item.attributes.titles.en_jp != null)
-                title.text = item.attributes.titles.en_jp
-            else
-                title.text = item.attributes.canonicalTitle
-
+            title.text = item.attributes.canonicalTitle
             descr.text = item.attributes.synopsis
             Glide.glideFetch("${item.attributes.posterImage.large}", "${item.attributes.posterImage.large}", image)
 
             title.setOnClickListener {
-                //FallViewModel.showMoreInfo(it.context, item)
+                viewModel.setSelectedShow(item.attributes.canonicalTitle)
+                openEpisodeList()
             }
         }
     }

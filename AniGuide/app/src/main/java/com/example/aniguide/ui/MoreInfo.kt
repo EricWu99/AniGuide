@@ -45,7 +45,6 @@ class MoreInfo : AppCompatActivity() {
 
         //Display the overview text for the episode
         ep_overview.text = intent.getStringExtra(EpisodeViewModel.overview_key)
-        ep_overview.movementMethod = ScrollingMovementMethod()
 
         //Display the air date and vote average for the episode
         ep_air_date.text = "Aired on ${intent.getStringExtra(EpisodeViewModel.air_date_key)}"

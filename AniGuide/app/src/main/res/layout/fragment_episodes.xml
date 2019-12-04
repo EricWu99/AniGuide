@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/homeLayout"
+    android:id="@+id/epLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical" >
@@ -9,10 +9,10 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/swipeRefreshLayout" >
+        android:id="@+id/epSwipeRefreshLayout" >
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/showList"
+            android:id="@+id/epShowList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/darker_gray" />

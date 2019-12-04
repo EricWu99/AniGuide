@@ -2,6 +2,7 @@ package com.example.aniguide.ui.tmdb_ep
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.aniguide.tmdb_api.Episode
 import com.example.aniguide.tmdb_api.TMDBApi
@@ -15,7 +16,7 @@ class EpisodeViewModel : ViewModel() {
     private val api = TMDBApi.create()
     private val repo = TMDBRepository(api)
 
-    private val series = MutableLiveData<String>().apply { value = "Boruto" }
+    private val show = MutableLiveData<String>().apply { value = "Boruto" }
     private val season = MutableLiveData<String>().apply { value = "1" }
 
     private val episodes = MutableLiveData<List<Episode>>().apply { value = ArrayList() }
@@ -50,8 +51,13 @@ class EpisodeViewModel : ViewModel() {
         return searchEpisodes
     }
 
-    fun observeSeries(): MutableLiveData<String> {
-        return series
+    fun updateShow(value: String)
+    {
+        show.value = value
+    }
+
+    fun observeShow(): MutableLiveData<String> {
+        return show
     }
 
     fun observeEpisodes(): MutableLiveData<List<Episode>> {
@@ -61,7 +67,7 @@ class EpisodeViewModel : ViewModel() {
     fun refreshEpisodes() = viewModelScope.launch(
         context = viewModelScope.coroutineContext
                 + Dispatchers.IO) {
-        episodes.postValue(repo.getSeason(series.value.toString(),season.value.toString()))
+        episodes.postValue(repo.getSeason(show.value.toString(),season.value.toString()))
     }
 
     companion object {

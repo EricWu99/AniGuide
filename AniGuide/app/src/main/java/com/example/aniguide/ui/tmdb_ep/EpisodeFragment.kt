@@ -1,6 +1,7 @@
 package com.example.aniguide.ui.tmdb_ep
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,22 +17,13 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.aniguide.MainActivity
 import com.example.aniguide.R
 import com.example.aniguide.tmdb_api.Episode
+import com.example.aniguide.ui.home.HomeFragment
 import com.example.aniguide.ui.tmdb_ep.EpisodeListAdapter
 
 class EpisodeFragment : Fragment() {
 
     private lateinit var viewModel: EpisodeViewModel
     private lateinit var episodeAdapter: EpisodeListAdapter
-
-    companion object {
-        fun newInstance(): EpisodeFragment {
-            return EpisodeFragment()
-        }
-    }
-
-    fun myRestore() {
-
-    }
 
     private fun submitEpisodes(episode: List<Episode>, adapter: EpisodeListAdapter) {
 
@@ -40,7 +32,7 @@ class EpisodeFragment : Fragment() {
 
     private fun initAdapter(root: View) {
 
-        val main = root.findViewById<RecyclerView>(R.id.showList)
+        val main = root.findViewById<RecyclerView>(R.id.epShowList)
         episodeAdapter = EpisodeListAdapter(viewModel)
 
         main.adapter = episodeAdapter
@@ -49,7 +41,7 @@ class EpisodeFragment : Fragment() {
 
     private fun initSwipeLayout(root: View) {
 
-        val swipe = root.findViewById<SwipeRefreshLayout>(R.id.swipeRefreshLayout)
+        val swipe = root.findViewById<SwipeRefreshLayout>(R.id.epSwipeRefreshLayout)
         swipe.setOnRefreshListener {
 
             viewModel.refreshEpisodes()
@@ -75,16 +67,21 @@ class EpisodeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProviders.of(this).get(EpisodeViewModel::class.java)
+        viewModel = activity?.run {
+            ViewModelProviders.of(this).get(EpisodeViewModel::class.java)
+        } ?: throw Exception("Invalid Activity")
 
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
+        val root = inflater.inflate(R.layout.fragment_episodes, container, false)
         initAdapter(root)
         initSwipeLayout(root)
 
-        setActionTitle(viewModel.observeSeries().value!!)
+        val selectedShow = arguments!!.getString(HomeFragment.show_key)!!
+        viewModel.updateShow(selectedShow)
+
+        setActionTitle(viewModel.observeShow().value!!)
         enableSearchFunction()
 
-        viewModel.observeSeries().observe(this, Observer {
+        viewModel.observeShow().observe(this, Observer {
             viewModel.refreshEpisodes()
         })
 
