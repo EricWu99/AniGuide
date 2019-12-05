@@ -14,6 +14,7 @@ import android.view.Menu
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.ActionBar
+import kotlinx.android.synthetic.main.action_bar.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -45,11 +46,21 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_popular, R.id.nav_fall, R.id.nav_winter, R.id.nav_spring, R.id.nav_summer,
-                R.id.nav_share, R.id.nav_send, R.id.epLayout
+                R.id.nav_share, R.id.nav_send
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        actionSearch.queryHint = ""
+        actionSearch.setOnSearchClickListener {
+            actionTitle.visibility = View.GONE
+        }
+        actionSearch.setOnCloseListener {
+            actionTitle.visibility = View.VISIBLE
+            false
+        }
+
     }
 
     override fun onBackPressed() {
@@ -66,8 +77,6 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
-
-
 
     fun hideKeyboard() {
         val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager

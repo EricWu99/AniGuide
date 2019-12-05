@@ -35,11 +35,11 @@ class ShowListAdapter(private val viewModel: ShowViewModel,
             Glide.glideFetch("${item.attributes.posterImage.large}", "${item.attributes.posterImage.large}", image)
 
             image.setOnClickListener {
-                viewModel.setSelectedShow(item.attributes.canonicalTitle)
+                viewModel.updateSelectedShow(item.attributes.canonicalTitle)
                 openEpisodeList()
             }
             title.setOnClickListener {
-                viewModel.setSelectedShow(item.attributes.canonicalTitle)
+                viewModel.updateSelectedShow(item.attributes.canonicalTitle)
                 openEpisodeList()
             }
         }

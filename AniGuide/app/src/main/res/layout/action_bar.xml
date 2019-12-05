@@ -7,12 +7,14 @@
     <TextView
         android:id="@+id/actionTitle"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
+        android:layout_width="280dp"
         android:layout_gravity="start|center_vertical"
         android:textSize="18sp"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        android:text="" />
+        android:text=""
+        android:maxLines="2"
+        android:ellipsize="end" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -20,10 +22,12 @@
 
     <SearchView
         android:id="@+id/actionSearch"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:gravity="end|center_vertical"
         android:iconifiedByDefault="true"
         android:searchIcon="@drawable/ic_search_white_24dp"
+        android:searchHintIcon="@color/colorPrimaryDark"
         android:layout_alignParentRight="true"/>
 
     </RelativeLayout>

@@ -31,7 +31,7 @@ class PopularFragment : Fragment() {
     {
         val fragment = EpisodeFragment()
         val bundle = Bundle()
-        bundle.putString(show_key, viewModel.getSelectedShow())
+        bundle.putString(show_key, viewModel.observeSelectedShow().value!!)
         fragment.arguments = bundle
 
         fragmentManager!!

@@ -18,11 +18,11 @@
         android:background="@color/colorPrimaryDark" >
 
         <ImageView
+            android:id="@+id/ep_image"
             android:layout_width="190dp"
             android:layout_height="236dp"
             android:layout_gravity="center_vertical|start"
-            android:scaleType="fitXY"
-            android:id="@+id/ep_image" />
+            android:scaleType="fitXY" />
 
         <TextView
             android:id="@+id/ep_title"
@@ -30,7 +30,11 @@
             android:layout_height="80dp"
             android:layout_gravity="center_vertical"
             android:textSize="16sp"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:maxLines="3"
+            android:ellipsize="end"/>
 
     </LinearLayout>
 

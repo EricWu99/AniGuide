@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.example.aniguide.MainActivity
 import com.example.aniguide.R
 import com.example.aniguide.kitsu_api.Data
 import com.example.aniguide.ui.show.ShowViewModel
@@ -32,7 +33,7 @@ class FallFragment : Fragment() {
     {
         val fragment = EpisodeFragment()
         val bundle = Bundle()
-        bundle.putString(show_key, viewModel.getSelectedShow())
+        bundle.putString(show_key, viewModel.observeSelectedShow().value!!)
         fragment.arguments = bundle
 
         fragmentManager!!

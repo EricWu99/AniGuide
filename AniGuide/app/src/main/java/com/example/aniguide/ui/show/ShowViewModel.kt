@@ -1,5 +1,6 @@
 package com.example.aniguide.ui.show
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -22,7 +23,7 @@ class ShowViewModel : ViewModel() {
     private val selectedShow = MutableLiveData<String>()
     private val shows = MutableLiveData<List<Data>>().apply { value = ArrayList() }
 
-    fun observeShows(): MutableLiveData<List<Data>> {
+    fun observeShows(): LiveData<List<Data>> {
         return shows
     }
 
@@ -31,12 +32,12 @@ class ShowViewModel : ViewModel() {
         season.value = value
     }
 
-    fun getSelectedShow(): String
+    fun observeSelectedShow(): LiveData<String>
     {
-        return selectedShow.value!!
+        return selectedShow
     }
 
-    fun setSelectedShow(value: String)
+    fun updateSelectedShow(value: String)
     {
         selectedShow.value = value
     }
