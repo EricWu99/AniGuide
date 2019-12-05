@@ -30,7 +30,7 @@
                 android:id="@+id/epShowList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/darker_gray" />
+                android:background="@android:color/black" />
 
 <!--        </LinearLayout>-->
 

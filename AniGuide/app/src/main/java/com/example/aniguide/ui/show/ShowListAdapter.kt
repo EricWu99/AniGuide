@@ -26,22 +26,21 @@ class ShowListAdapter(private val viewModel: ShowViewModel,
 
         var title = itemView.findViewById<TextView>(R.id.ep_title)
         var image = itemView.findViewById<ImageView>(R.id.ep_image)
-//        var descr = itemView.findViewById<TextView>(R.id.ep_text)
 
         fun bind(item: Data) {
 
             title.text = item.attributes.canonicalTitle
-//            descr.text = item.attributes.synopsis
             Glide.glideFetch("${item.attributes.posterImage.large}", "${item.attributes.posterImage.large}", image)
 
-            image.setOnClickListener {
-                viewModel.updateSelectedShow(item.attributes.canonicalTitle)
-                openEpisodeList()
-            }
             title.setOnClickListener {
                 viewModel.updateSelectedShow(item.attributes.canonicalTitle)
                 openEpisodeList()
             }
+            image.setOnClickListener {
+                viewModel.updateSelectedShow(item.attributes.canonicalTitle)
+                openEpisodeList()
+            }
+
         }
     }
 

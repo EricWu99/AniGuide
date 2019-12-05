@@ -14,8 +14,14 @@
         <item name="android:editTextColor">@android:color/white</item>
         <item name="android:listDivider">@android:color/white</item>
 
-        <item name="android:ambientShadowAlpha">0.5</item>
-        <item name="android:spotShadowAlpha">0.5</item>
+        <item name="android:ambientShadowAlpha">0.2</item>
+        <item name="android:spotShadowAlpha">0.2</item>
+    </style>
+
+    <style name="DrawerFont">
+        <item name="android:textSize">16sp</item>
+        
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

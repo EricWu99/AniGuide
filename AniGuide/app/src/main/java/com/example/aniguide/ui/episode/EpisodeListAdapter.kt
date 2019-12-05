@@ -37,6 +37,9 @@ class EpisodeListAdapter(private val viewModel: EpisodeViewModel)
             title.setOnClickListener {
                 EpisodeViewModel.showMoreInfo(it.context, item)
             }
+            image.setOnClickListener {
+                EpisodeViewModel.showMoreInfo(it.context, item)
+            }
         }
     }
 

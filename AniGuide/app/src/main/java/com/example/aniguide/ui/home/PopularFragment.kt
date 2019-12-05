@@ -10,7 +10,6 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.aniguide.R
@@ -74,7 +73,7 @@ class PopularFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(this).get(ShowViewModel::class.java)
 
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
+        val root = inflater.inflate(R.layout.fragment_popular, container, false)
         initAdapter(root)
         initSwipeLayout(root)
 

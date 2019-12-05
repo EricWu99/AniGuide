@@ -3,4 +3,10 @@
     <color name="colorPrimary">#1A1A1B</color>
     <color name="colorPrimaryDark">#1A1A1B</color>
     <color name="colorAccent">#ADADAD</color>
+
+    <color name="colorPopular">#000000</color>
+    <color name="colorFall">#FFC282</color>
+    <color name="colorWinter">#AFD9E5</color>
+    <color name="colorSpring">#FFD1DC</color>
+    <color name="colorSummer">#FDFD96</color>
 </resources>
