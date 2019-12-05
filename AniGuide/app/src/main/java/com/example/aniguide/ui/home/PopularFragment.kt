@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -17,7 +18,7 @@ import com.example.aniguide.kitsu_api.Data
 import com.example.aniguide.ui.show.ShowListAdapter
 import com.example.aniguide.ui.show.ShowViewModel
 
-class HomeFragment : Fragment() {
+class PopularFragment : Fragment() {
 
     private lateinit var viewModel: ShowViewModel
     private lateinit var showAdapter: ShowListAdapter
@@ -52,7 +53,7 @@ class HomeFragment : Fragment() {
         showAdapter = ShowListAdapter(viewModel) { openEpisodeList() }
 
         main.adapter = showAdapter
-        main.layoutManager = LinearLayoutManager(context)
+        main.layoutManager = GridLayoutManager(context, 2)
     }
 
     private fun initSwipeLayout(root: View) {
@@ -77,7 +78,7 @@ class HomeFragment : Fragment() {
         initAdapter(root)
         initSwipeLayout(root)
 
-        activity?.findViewById<TextView>(R.id.actionTitle)?.text = "All Shows"
+        activity?.findViewById<TextView>(R.id.actionTitle)?.text = "Popular"
 
         viewModel.refreshAllShows()
 

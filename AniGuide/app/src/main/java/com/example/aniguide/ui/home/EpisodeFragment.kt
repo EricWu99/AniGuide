@@ -4,9 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
+import android.widget.SearchView
 import android.widget.TextView
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -55,10 +54,17 @@ class EpisodeFragment : Fragment() {
 
     private fun enableSearchFunction() {
 
-        activity?.findViewById<EditText>(R.id.actionSearch)?.addTextChangedListener {
-            viewModel.updateSearchTerm(it.toString())
-            if(it.toString() == "") (activity as MainActivity).hideKeyboard()
-        }
+        activity?.findViewById<SearchView>(R.id.actionSearch)?.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+
+            override fun onQueryTextChange(value: String?): Boolean {
+                viewModel.updateSearchTerm(value.toString())
+                if(value.toString() == "") (activity as MainActivity).hideKeyboard()
+                return true
+            }
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+        })
     }
 
     override fun onCreateView(
@@ -74,7 +80,7 @@ class EpisodeFragment : Fragment() {
         initAdapter(root)
         initSwipeLayout(root)
 
-        val selectedShow = arguments!!.getString(HomeFragment.show_key)!!
+        val selectedShow = arguments!!.getString(PopularFragment.show_key)!!
         viewModel.updateShow(selectedShow)
 
         setActionTitle(viewModel.observeShow().value!!)
