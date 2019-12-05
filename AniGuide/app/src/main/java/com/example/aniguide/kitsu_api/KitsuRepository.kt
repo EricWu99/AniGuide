@@ -6,7 +6,6 @@ class KitsuRepository(private val KitsuApi: KitsuApi) {
 
     suspend fun getSeasonalShows(season: String, year: String, offset: Int): List<Data>{
         val postList: MutableList<Data> = ArrayList()
-
         val childResponses = KitsuApi.getSeasonalShows(season,year,offset).data
         childResponses.forEach {
             postList.add(it)
@@ -17,7 +16,7 @@ class KitsuRepository(private val KitsuApi: KitsuApi) {
     suspend fun getAllShows(year: String, offset: Int): List<Data>{
         val postList: MutableList<Data> = ArrayList()
 
-        val childResponses = KitsuApi.getAllShows(year,offset).data
+        val childResponses = KitsuApi.getAllShows(/*year,*/offset).data
         childResponses.forEach {
             postList.add(it)
         }

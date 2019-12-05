@@ -17,7 +17,7 @@ class ShowViewModel : ViewModel() {
 
     private val season = MutableLiveData<String>().apply { value = "fall" }
     private val year = MutableLiveData<String>().apply { value = "2019" }
-    private val offset = MutableLiveData<Int>().apply { value = 20 }
+    private val offset = MutableLiveData<Int>().apply { value = 0 }
 
     private val selectedShow = MutableLiveData<String>()
     private val shows = MutableLiveData<List<Data>>().apply { value = ArrayList() }

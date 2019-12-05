@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -53,7 +54,7 @@ class WinterFragment : Fragment() {
         showAdapter = ShowListAdapter(viewModel) { openEpisodeList() }
 
         main.adapter = showAdapter
-        main.layoutManager = LinearLayoutManager(context)
+        main.layoutManager = GridLayoutManager(context, 2)
     }
 
     private fun initSwipeLayout(root: View) {

@@ -12,10 +12,10 @@ import retrofit2.http.Query
 
 interface KitsuApi {
 
-    @GET ("/api/edge/anime?page%5Dlimit%5D=20")
-    suspend fun getAllShows(@Query("filter[seasonYear]") year: String, @Query("page[offset]") offset: Int): ListingData
+    @GET ("/api/edge/anime?sort=popularityRank&page%5Dlimit%5D=20&filter%5Dsubtype%5D=tv")
+    suspend fun getAllShows(/*@Query("filter[seasonYear]") year: String, */@Query("page[offset]") offset: Int): ListingData
 
-    @GET ("/api/edge/anime?page%5Dlimit%5D=20")
+    @GET ("/api/edge/anime?sort=popularityRank&page%5Dlimit%5D=20&filter%5Dsubtype%5D=tv")
     suspend fun getSeasonalShows(@Query("filter[season]") season: String, @Query("filter[seasonYear]") year: String, @Query("page[offset]") offset: Int): ListingData
 
     class ListingData(

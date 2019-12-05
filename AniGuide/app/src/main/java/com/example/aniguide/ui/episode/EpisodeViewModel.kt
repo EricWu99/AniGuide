@@ -2,6 +2,7 @@ package com.example.aniguide.ui.episode
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.aniguide.tmdb_api.Episode
 import com.example.aniguide.tmdb_api.TMDBApi
@@ -54,6 +55,21 @@ class EpisodeViewModel : ViewModel() {
     {
         show.value = value
     }
+
+    fun updateSeason()
+    {
+        season.value = "1"
+        var regex = "\\s[1-9]".toRegex()
+        val match = regex.find(show.value!!.substring(show.value!!.length/2))
+        if(match != null && match.value.length == 2){
+            season.value = match.value.removePrefix(" ")
+        }
+        //This is a special case in which TMDB editors only gave it 1 season instead of 3
+        if(show.value!!.contains("Bungou"))
+            season.value = "1"
+
+    }
+
 
     fun observeShow(): MutableLiveData<String> {
         return show

@@ -82,6 +82,7 @@ class EpisodeFragment : Fragment() {
 
         val selectedShow = arguments!!.getString(PopularFragment.show_key)!!
         viewModel.updateShow(selectedShow)
+        viewModel.updateSeason()
 
         setActionTitle(viewModel.observeShow().value!!)
         enableSearchFunction()
