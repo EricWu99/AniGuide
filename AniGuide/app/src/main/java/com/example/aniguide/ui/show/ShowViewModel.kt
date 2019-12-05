@@ -1,6 +1,5 @@
-package com.example.aniguide.ui
+package com.example.aniguide.ui.show
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -13,25 +13,25 @@
 
     <fragment
         android:id="@+id/nav_fall"
-        android:name="com.example.aniguide.ui.fall.FallFragment"
+        android:name="com.example.aniguide.ui.seasons.FallFragment"
         android:label="Fall"
         tools:layout="@layout/fragment_fall" />
 
     <fragment
         android:id="@+id/nav_winter"
-        android:name="com.example.aniguide.ui.winter.WinterFragment"
+        android:name="com.example.aniguide.ui.seasons.WinterFragment"
         android:label="Winter"
         tools:layout="@layout/fragment_winter" />
 
     <fragment
         android:id="@+id/nav_spring"
-        android:name="com.example.aniguide.ui.spring.SpringFragment"
+        android:name="com.example.aniguide.ui.seasons.SpringFragment"
         android:label="Spring"
         tools:layout="@layout/fragment_spring" />
 
     <fragment
         android:id="@+id/nav_summer"
-        android:name="com.example.aniguide.ui.summer.SummerFragment"
+        android:name="com.example.aniguide.ui.seasons.SummerFragment"
         android:label="Summer"
         tools:layout="@layout/fragment_summer" />
 

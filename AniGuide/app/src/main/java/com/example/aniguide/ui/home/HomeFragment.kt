@@ -14,10 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.aniguide.R
 import com.example.aniguide.kitsu_api.Data
-import com.example.aniguide.ui.ShowListAdapter
-import com.example.aniguide.ui.ShowViewModel
-import com.example.aniguide.ui.tmdb_ep.EpisodeFragment
-import com.example.aniguide.ui.tmdb_ep.EpisodeViewModel
+import com.example.aniguide.ui.show.ShowListAdapter
+import com.example.aniguide.ui.show.ShowViewModel
 
 class HomeFragment : Fragment() {
 

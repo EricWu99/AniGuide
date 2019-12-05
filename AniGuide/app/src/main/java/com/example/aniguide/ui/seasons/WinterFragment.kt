@@ -1,4 +1,4 @@
-package com.example.aniguide.ui.summer
+package com.example.aniguide.ui.seasons
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,12 +14,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.aniguide.R
 import com.example.aniguide.kitsu_api.Data
-import com.example.aniguide.ui.ShowListAdapter
-import com.example.aniguide.ui.ShowViewModel
-import com.example.aniguide.ui.tmdb_ep.EpisodeFragment
-import com.example.aniguide.ui.tmdb_ep.EpisodeViewModel
+import com.example.aniguide.ui.show.ShowListAdapter
+import com.example.aniguide.ui.show.ShowViewModel
+import com.example.aniguide.ui.home.EpisodeFragment
 
-class SummerFragment : Fragment() {
+class WinterFragment : Fragment() {
 
     private lateinit var viewModel: ShowViewModel
     private lateinit var showAdapter: ShowListAdapter
@@ -50,7 +49,7 @@ class SummerFragment : Fragment() {
 
     private fun initAdapter(root: View) {
 
-        val main = root.findViewById<RecyclerView>(R.id.fallShowList)
+        val main = root.findViewById<RecyclerView>(R.id.winterShowList)
         showAdapter = ShowListAdapter(viewModel) { openEpisodeList() }
 
         main.adapter = showAdapter
@@ -59,7 +58,7 @@ class SummerFragment : Fragment() {
 
     private fun initSwipeLayout(root: View) {
 
-        val swipe = root.findViewById<SwipeRefreshLayout>(R.id.summerSwipeRefreshLayout)
+        val swipe = root.findViewById<SwipeRefreshLayout>(R.id.winterSwipeRefreshLayout)
         swipe.setOnRefreshListener {
 
             viewModel.refreshSeasonalShows()
@@ -74,12 +73,12 @@ class SummerFragment : Fragment() {
     ): View? {
 
         viewModel = ViewModelProviders.of(this).get(ShowViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_summer, container, false)
+        val root = inflater.inflate(R.layout.fragment_winter, container, false)
         initAdapter(root)
         initSwipeLayout(root)
 
-        viewModel.updateSeason("summer")
-        activity?.findViewById<TextView>(R.id.actionTitle)?.text = "Summer"
+        viewModel.updateSeason("winter")
+        activity?.findViewById<TextView>(R.id.actionTitle)?.text = "Winter"
 
         viewModel.refreshSeasonalShows()
 

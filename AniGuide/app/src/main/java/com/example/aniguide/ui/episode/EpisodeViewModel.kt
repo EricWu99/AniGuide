@@ -1,8 +1,7 @@
-package com.example.aniguide.ui.tmdb_ep
+package com.example.aniguide.ui.episode
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.aniguide.tmdb_api.Episode
 import com.example.aniguide.tmdb_api.TMDBApi

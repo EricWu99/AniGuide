@@ -1,7 +1,6 @@
-package com.example.aniguide.ui.fall
+package com.example.aniguide.ui.seasons
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,10 +14,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.aniguide.R
 import com.example.aniguide.kitsu_api.Data
-import com.example.aniguide.ui.ShowViewModel
-import com.example.aniguide.ui.ShowListAdapter
-import com.example.aniguide.ui.tmdb_ep.EpisodeFragment
-import com.example.aniguide.ui.tmdb_ep.EpisodeViewModel
+import com.example.aniguide.ui.show.ShowViewModel
+import com.example.aniguide.ui.show.ShowListAdapter
+import com.example.aniguide.ui.home.EpisodeFragment
 
 class FallFragment : Fragment() {
 
@@ -52,7 +50,7 @@ class FallFragment : Fragment() {
     private fun initAdapter(root: View) {
 
         val main = root.findViewById<RecyclerView>(R.id.fallShowList)
-        showAdapter = ShowListAdapter(viewModel)  { openEpisodeList() }
+        showAdapter = ShowListAdapter(viewModel) { openEpisodeList() }
 
         main.adapter = showAdapter
         main.layoutManager = LinearLayoutManager(context)

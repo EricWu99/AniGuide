@@ -1,4 +1,4 @@
-package com.example.aniguide.ui.winter
+package com.example.aniguide.ui.seasons
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,12 +14,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.aniguide.R
 import com.example.aniguide.kitsu_api.Data
-import com.example.aniguide.ui.ShowListAdapter
-import com.example.aniguide.ui.ShowViewModel
-import com.example.aniguide.ui.tmdb_ep.EpisodeFragment
-import com.example.aniguide.ui.tmdb_ep.EpisodeViewModel
+import com.example.aniguide.ui.show.ShowListAdapter
+import com.example.aniguide.ui.show.ShowViewModel
+import com.example.aniguide.ui.home.EpisodeFragment
 
-class WinterFragment : Fragment() {
+class SpringFragment : Fragment() {
 
     private lateinit var viewModel: ShowViewModel
     private lateinit var showAdapter: ShowListAdapter
@@ -50,7 +49,7 @@ class WinterFragment : Fragment() {
 
     private fun initAdapter(root: View) {
 
-        val main = root.findViewById<RecyclerView>(R.id.fallShowList)
+        val main = root.findViewById<RecyclerView>(R.id.springShowList)
         showAdapter = ShowListAdapter(viewModel) { openEpisodeList() }
 
         main.adapter = showAdapter
@@ -59,13 +58,15 @@ class WinterFragment : Fragment() {
 
     private fun initSwipeLayout(root: View) {
 
-        val swipe = root.findViewById<SwipeRefreshLayout>(R.id.winterSwipeRefreshLayout)
+        val swipe = root.findViewById<SwipeRefreshLayout>(R.id.springSwipeRefreshLayout)
         swipe.setOnRefreshListener {
 
             viewModel.refreshSeasonalShows()
             swipe.isRefreshing = false
         }
     }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -74,12 +75,12 @@ class WinterFragment : Fragment() {
     ): View? {
 
         viewModel = ViewModelProviders.of(this).get(ShowViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_winter, container, false)
+        val root = inflater.inflate(R.layout.fragment_spring, container, false)
         initAdapter(root)
         initSwipeLayout(root)
 
-        viewModel.updateSeason("winter")
-        activity?.findViewById<TextView>(R.id.actionTitle)?.text = "Winter"
+        viewModel.updateSeason("spring")
+        activity?.findViewById<TextView>(R.id.actionTitle)?.text = "Spring"
 
         viewModel.refreshSeasonalShows()
 

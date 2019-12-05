@@ -1,7 +1,6 @@
-package com.example.aniguide.ui.tmdb_ep
+package com.example.aniguide.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,8 +16,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.aniguide.MainActivity
 import com.example.aniguide.R
 import com.example.aniguide.tmdb_api.Episode
-import com.example.aniguide.ui.home.HomeFragment
-import com.example.aniguide.ui.tmdb_ep.EpisodeListAdapter
+import com.example.aniguide.ui.episode.EpisodeListAdapter
+import com.example.aniguide.ui.episode.EpisodeViewModel
 
 class EpisodeFragment : Fragment() {
 

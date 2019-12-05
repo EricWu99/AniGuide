@@ -1,13 +1,12 @@
 package com.example.aniguide.ui
 
 import android.os.Bundle
-import android.text.method.ScrollingMovementMethod
 import android.view.View
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.example.aniguide.R
 import com.example.aniguide.glide.Glide
-import com.example.aniguide.ui.tmdb_ep.EpisodeViewModel
+import com.example.aniguide.ui.episode.EpisodeViewModel
 import kotlinx.android.synthetic.main.activity_more_info.*
 import kotlinx.android.synthetic.main.content_more_info.*
 import kotlinx.android.synthetic.main.more_info_bar.*
