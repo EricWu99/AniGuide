@@ -23,6 +23,8 @@ class ShowViewModel : ViewModel() {
     private val selectedShow = MutableLiveData<String>()
     private val shows = MutableLiveData<List<Data>>().apply { value = ArrayList() }
 
+    val maxLimit = 20
+
     fun observeShows(): LiveData<List<Data>> {
         return shows
     }
@@ -30,6 +32,15 @@ class ShowViewModel : ViewModel() {
     fun updateSeason(value: String)
     {
         season.value = value
+    }
+
+    fun updateOffset(reset: Boolean)
+    {
+        if(reset == false)
+            offset.value = offset.value!!.plus(maxLimit)
+        else
+            offset.value = 0
+
     }
 
     fun observeSelectedShow(): LiveData<String>
@@ -42,16 +53,38 @@ class ShowViewModel : ViewModel() {
         selectedShow.value = value
     }
 
-    fun refreshSeasonalShows() = viewModelScope.launch(
+    fun resetSeasonal() = viewModelScope.launch(
         context = viewModelScope.coroutineContext
                 + Dispatchers.IO) {
         shows.postValue(repo.getSeasonalShows(season.value!!, year.value!!, offset.value!!))
     }
 
-    fun refreshAllShows() = viewModelScope.launch(
+    fun resetAllShows() = viewModelScope.launch(
         context = viewModelScope.coroutineContext
                 + Dispatchers.IO) {
         shows.postValue(repo.getAllShows(year.value!!, offset.value!!))
+    }
+
+    fun refreshSeasonalShows() = viewModelScope.launch(
+        context = viewModelScope.coroutineContext
+                + Dispatchers.IO) {
+        if(!shows.value.isNullOrEmpty()) {
+            var show = shows.value!!.toMutableList()
+            show.addAll(show.size , repo.getSeasonalShows(season.value!!, year.value!!, offset.value!!))
+            shows.postValue(show)
+        }
+        else{ shows.postValue(repo.getSeasonalShows(season.value!!, year.value!!, offset.value!!)) }
+    }
+
+    fun refreshAllShows() = viewModelScope.launch(
+        context = viewModelScope.coroutineContext
+                + Dispatchers.IO) {
+        if(!shows.value.isNullOrEmpty()) {
+            var show = shows.value!!.toMutableList()
+            show.addAll(show.size ,repo.getAllShows(year.value!!, offset.value!!))
+            shows.postValue(show)
+        }
+        else{ shows.postValue(repo.getAllShows(year.value!!, offset.value!!)) }
     }
 
 }

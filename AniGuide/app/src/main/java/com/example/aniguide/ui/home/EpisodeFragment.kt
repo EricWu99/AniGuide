@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AbsListView
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -35,6 +36,8 @@ class EpisodeFragment : Fragment() {
 
         main.adapter = episodeAdapter
         main.layoutManager = LinearLayoutManager(context)
+
+
     }
 
     private fun initSwipeLayout(root: View) {

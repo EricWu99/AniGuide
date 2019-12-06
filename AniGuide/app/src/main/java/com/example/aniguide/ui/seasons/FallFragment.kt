@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -19,6 +20,7 @@ import com.example.aniguide.kitsu_api.Data
 import com.example.aniguide.ui.show.ShowViewModel
 import com.example.aniguide.ui.show.ShowListAdapter
 import com.example.aniguide.ui.home.EpisodeFragment
+import com.google.android.material.navigation.NavigationView
 
 class FallFragment : Fragment() {
 
@@ -56,16 +58,36 @@ class FallFragment : Fragment() {
 
         main.adapter = showAdapter
         main.layoutManager = GridLayoutManager(context, 2)
+        //https://stackoverflow.com/questions/36127734/detect-when-recyclerview-reaches-the-bottom-most-position-while-scrolling
+        val gridManager = GridLayoutManager(context, 2)
+        main.addOnScrollListener( object: RecyclerView.OnScrollListener(){
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                if(!recyclerView.canScrollVertically(1)) {
+                    if (gridManager.findFirstVisibleItemPosition() >= gridManager!!.itemCount - 4) {
+                        viewModel.updateOffset(false)
+                        viewModel.refreshSeasonalShows()
+                    }
+                }
+            }
+        })
     }
 
     private fun initSwipeLayout(root: View) {
 
         val swipe = root.findViewById<SwipeRefreshLayout>(R.id.fallSwipeRefreshLayout)
         swipe.setOnRefreshListener {
-
-            viewModel.refreshSeasonalShows()
+            viewModel.updateOffset(true)
+            viewModel.resetSeasonal()
             swipe.isRefreshing = false
         }
+    }
+
+    private fun setHeaderImage(image: Int)
+    {
+        val navView = activity?.findViewById<NavigationView>(R.id.nav_view)
+        val headerView = navView?.getHeaderView(0)
+        val headerImage = headerView?.findViewById<ImageView>(R.id.navImage)
+        headerImage?.setImageResource(image)
     }
 
     override fun onCreateView(
@@ -81,6 +103,7 @@ class FallFragment : Fragment() {
 
         viewModel.updateSeason("fall")
         activity?.findViewById<TextView>(R.id.actionTitle)?.text = "Fall"
+        setHeaderImage(R.drawable.fallanime)
 
         viewModel.refreshSeasonalShows()
 
