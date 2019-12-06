@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
+import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.aniguide.MainActivity
 import com.example.aniguide.R
+import com.example.aniguide.glide.Glide
 import com.example.aniguide.tmdb_api.Episode
 import com.example.aniguide.ui.episode.EpisodeListAdapter
 import com.example.aniguide.ui.episode.EpisodeViewModel
@@ -36,8 +38,6 @@ class EpisodeFragment : Fragment() {
 
         main.adapter = episodeAdapter
         main.layoutManager = LinearLayoutManager(context)
-
-
     }
 
     private fun setActionTitle(value: String)

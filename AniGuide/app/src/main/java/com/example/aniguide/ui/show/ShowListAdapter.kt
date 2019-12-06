@@ -12,12 +12,11 @@ import com.example.aniguide.R
 import com.example.aniguide.tmdb_api.Episode
 import com.example.aniguide.glide.Glide
 import com.example.aniguide.kitsu_api.Data
+import com.example.aniguide.kitsu_api.Shows
 
 
 class ShowListAdapter(private val viewModel: ShowViewModel,
-                      private val openEpisodeList: ()->Unit) : ListAdapter<Episode, ShowListAdapter.VH>(
-    TMDB_Diff()
-) {
+                      private val openEpisodeList: ()->Unit) : ListAdapter<Shows, ShowListAdapter.VH>(Diff()) {
 
     private var shows = listOf<Data>()
 
@@ -61,14 +60,15 @@ class ShowListAdapter(private val viewModel: ShowViewModel,
 
     override fun getItemCount() = shows.size
 
-    class TMDB_Diff : DiffUtil.ItemCallback<Episode>() {
+    class Diff : DiffUtil.ItemCallback<Shows>() {
 
-        override fun areItemsTheSame(oldItem: Episode, newItem: Episode): Boolean {
-            return oldItem.id == newItem.id
+        override fun areItemsTheSame(oldItem: Shows, newItem: Shows): Boolean {
+            return oldItem.data.id == newItem.data.id
         }
 
-        override fun areContentsTheSame(oldItem: Episode, newItem: Episode): Boolean {
-            return oldItem.name == newItem.name && oldItem.overview == newItem.overview
+        override fun areContentsTheSame(oldItem: Shows, newItem: Shows): Boolean {
+            return oldItem.data.attributes.canonicalTitle == newItem.data.attributes.canonicalTitle
+                    && oldItem.data.attributes.synopsis == newItem.data.attributes.synopsis
         }
     }
 

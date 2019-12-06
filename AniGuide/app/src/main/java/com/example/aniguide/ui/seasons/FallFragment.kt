@@ -19,6 +19,7 @@ import com.example.aniguide.ui.show.ShowViewModel
 import com.example.aniguide.ui.show.ShowListAdapter
 import com.example.aniguide.ui.home.EpisodeFragment
 import com.google.android.material.navigation.NavigationView
+import kotlinx.android.synthetic.main.app_bar_main.*
 
 class FallFragment : Fragment() {
 
@@ -70,12 +71,15 @@ class FallFragment : Fragment() {
         })
     }
 
-    private fun setHeaderImage(image: Int)
+    private fun setHeaderImages()
     {
         val navView = activity?.findViewById<NavigationView>(R.id.nav_view)
         val headerView = navView?.getHeaderView(0)
         val headerImage = headerView?.findViewById<ImageView>(R.id.navImage)
-        headerImage?.setImageResource(image)
+        headerImage?.setImageResource(R.drawable.fallanimee)
+
+        val appbarImage = activity?.findViewById<ImageView>(R.id.appbar_image)
+        appbarImage?.setImageResource(R.drawable.fallanimee)
     }
 
     override fun onCreateView(
@@ -90,7 +94,7 @@ class FallFragment : Fragment() {
 
         viewModel.updateSeason("fall")
         activity?.findViewById<TextView>(R.id.actionTitle)?.text = "Fall"
-        setHeaderImage(R.drawable.fallanimee)
+        setHeaderImages()
 
         viewModel.refreshSeasonalShows()
 

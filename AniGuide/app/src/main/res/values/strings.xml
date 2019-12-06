@@ -12,8 +12,8 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
-    <string name="menu_send">Message Us</string>
+    <string name="menu_send">Send Mail</string>
 
-    <string name="rate_title">Thanks for being a alpha tester! Enjoy the App</string>
+    <string name="rate_title">Thanks for being an alpha tester! Let us know if you enjoy the app</string>
 
 </resources>

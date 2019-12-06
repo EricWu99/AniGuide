@@ -2,13 +2,13 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:background="@color/colorPopular" >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/showList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPopular" />
+        android:layout_height="wrap_content" />
 
 </FrameLayout>
 

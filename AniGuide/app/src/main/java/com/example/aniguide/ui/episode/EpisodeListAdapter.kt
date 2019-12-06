@@ -13,10 +13,7 @@ import com.example.aniguide.tmdb_api.Episode
 import com.example.aniguide.glide.Glide
 
 
-class EpisodeListAdapter(private val viewModel: EpisodeViewModel)
-    : ListAdapter<Episode, EpisodeListAdapter.VH>(
-    TMDB_Diff()
-) {
+class EpisodeListAdapter(private val viewModel: EpisodeViewModel) : ListAdapter<Episode, EpisodeListAdapter.VH>(Diff()) {
 
     private var episodes = listOf<Episode>()
 
@@ -39,6 +36,9 @@ class EpisodeListAdapter(private val viewModel: EpisodeViewModel)
             }
 
             title.setOnClickListener {
+                EpisodeViewModel.showMoreInfo(it.context, item)
+            }
+            descr.setOnClickListener {
                 EpisodeViewModel.showMoreInfo(it.context, item)
             }
             image.setOnClickListener {
@@ -64,7 +64,7 @@ class EpisodeListAdapter(private val viewModel: EpisodeViewModel)
 
     override fun getItemCount() = episodes.size
 
-    class TMDB_Diff : DiffUtil.ItemCallback<Episode>() {
+    class Diff : DiffUtil.ItemCallback<Episode>() {
 
         override fun areItemsTheSame(oldItem: Episode, newItem: Episode): Boolean {
             return oldItem.id == newItem.id

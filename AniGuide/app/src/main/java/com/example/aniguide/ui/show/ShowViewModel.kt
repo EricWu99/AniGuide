@@ -1,12 +1,11 @@
 package com.example.aniguide.ui.show
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.util.Log
+import androidx.lifecycle.*
 import com.example.aniguide.kitsu_api.Data
 import com.example.aniguide.kitsu_api.KitsuApi
 import com.example.aniguide.kitsu_api.KitsuRepository
+import com.example.aniguide.kitsu_api.Shows
 import com.example.aniguide.tmdb_api.Episode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,8 +23,38 @@ class ShowViewModel : ViewModel() {
     private val selectedShow = MutableLiveData<String>()
     private val shows = MutableLiveData<List<Data>>().apply { value = ArrayList() }
 
+    private val searchTerm = MutableLiveData<String?>().apply { value = "" }
+    private val searchShows = MediatorLiveData<List<Data>>()
+
     private val maxLimit = 20
 
+    init {
+        searchShows.addSource(searchTerm) {
+            searchShows.value = filterEpisodes(shows.value!!)
+        }
+    }
+
+    fun updateSearchTerm(value: String)
+    {
+        searchTerm.postValue(value)
+        Log.d("XXX", "$value")
+    }
+
+    private fun filterEpisodes(list: List<Data>): List<Data>
+    {
+        return list.filter { it.attributes.getShowFields().contains(searchTerm.value!!, ignoreCase = true)}
+    }
+
+    fun observeSearchShows(list: List<Data>): LiveData<List<Data>>
+    {
+        searchShows.value = filterEpisodes(list)
+        return searchShows
+    }
+
+    fun getSearchShows(): LiveData<List<Data>>
+    {
+        return searchShows
+    }
 
     fun observeShows(): LiveData<List<Data>> {
         return shows

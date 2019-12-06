@@ -71,12 +71,15 @@ class SummerFragment : Fragment() {
         })
     }
 
-    private fun setHeaderImage(image: Int)
+    private fun setHeaderImages()
     {
         val navView = activity?.findViewById<NavigationView>(R.id.nav_view)
         val headerView = navView?.getHeaderView(0)
         val headerImage = headerView?.findViewById<ImageView>(R.id.navImage)
-        headerImage?.setImageResource(image)
+        headerImage?.setImageResource(R.drawable.summeranime)
+
+        val appbarImage = activity?.findViewById<ImageView>(R.id.appbar_image)
+        appbarImage?.setImageResource(R.drawable.summeranime)
     }
 
     override fun onCreateView(
@@ -91,7 +94,7 @@ class SummerFragment : Fragment() {
 
         viewModel.updateSeason("summer")
         activity?.findViewById<TextView>(R.id.actionTitle)?.text = "Summer"
-        setHeaderImage(R.drawable.summeranime)
+        setHeaderImages()
 
         viewModel.refreshSeasonalShows()
 

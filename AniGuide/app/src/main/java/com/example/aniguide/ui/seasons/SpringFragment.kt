@@ -71,12 +71,15 @@ class SpringFragment : Fragment() {
         })
     }
 
-    private fun setHeaderImage(image: Int)
+    private fun setHeaderImages()
     {
         val navView = activity?.findViewById<NavigationView>(R.id.nav_view)
         val headerView = navView?.getHeaderView(0)
         val headerImage = headerView?.findViewById<ImageView>(R.id.navImage)
-        headerImage?.setImageResource(image)
+        headerImage?.setImageResource(R.drawable.springanime)
+
+        val appbarImage = activity?.findViewById<ImageView>(R.id.appbar_image)
+        appbarImage?.setImageResource(R.drawable.springanime)
     }
 
     override fun onCreateView(
@@ -91,7 +94,7 @@ class SpringFragment : Fragment() {
 
         viewModel.updateSeason("spring")
         activity?.findViewById<TextView>(R.id.actionTitle)?.text = "Spring"
-        setHeaderImage(R.drawable.springanime)
+        setHeaderImages()
 
         viewModel.refreshSeasonalShows()
 

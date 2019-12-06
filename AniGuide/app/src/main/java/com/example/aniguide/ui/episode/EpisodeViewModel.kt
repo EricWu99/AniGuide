@@ -51,6 +51,11 @@ class EpisodeViewModel : ViewModel() {
         return searchEpisodes
     }
 
+    fun getShowCover(): String
+    {
+        return episodes.value!![0].still_path!!
+    }
+
     fun updateShow(value: String)
     {
         show.value = value
@@ -74,12 +79,11 @@ class EpisodeViewModel : ViewModel() {
         }
     }
 
-
-    fun observeShow(): MutableLiveData<String> {
+    fun observeShow(): LiveData<String> {
         return show
     }
 
-    fun observeEpisodes(): MutableLiveData<List<Episode>> {
+    fun observeEpisodes(): LiveData<List<Episode>> {
         return episodes
     }
 

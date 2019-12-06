@@ -50,20 +50,20 @@ class PopularFragment : Fragment() {
         adapter.submitShows(shows)
     }
 
-//    private fun enableSearchFunction() {
-//
-//        activity?.findViewById<SearchView>(R.id.actionSearch)?.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
-//
-//            override fun onQueryTextChange(value: String?): Boolean {
-//                viewModel.updateSearchTerm(value.toString())
-//                if(value.toString() == "") (activity as MainActivity).hideKeyboard()
-//                return true
-//            }
-//            override fun onQueryTextSubmit(query: String?): Boolean {
-//                return true
-//            }
-//        })
-//    }
+    private fun enableSearchFunction() {
+
+        activity?.findViewById<SearchView>(R.id.actionSearch)?.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+
+            override fun onQueryTextChange(value: String?): Boolean {
+                viewModel.updateSearchTerm(value.toString())
+                if(value.toString() == "") (activity as MainActivity).hideKeyboard()
+                return true
+            }
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+        })
+    }
 
     private fun initAdapter(root: View) {
 
@@ -86,12 +86,15 @@ class PopularFragment : Fragment() {
         })
     }
 
-    private fun setHeaderImage(image: Int)
+    private fun setHeaderImages()
     {
         val navView = activity?.findViewById<NavigationView>(R.id.nav_view)
         val headerView = navView?.getHeaderView(0)
         val headerImage = headerView?.findViewById<ImageView>(R.id.navImage)
-        headerImage?.setImageResource(image)
+        headerImage?.setImageResource(R.drawable.popularanime)
+
+        val appbarImage = activity?.findViewById<ImageView>(R.id.appbar_image)
+        appbarImage?.setImageResource(R.drawable.popularanime)
     }
 
     override fun onCreateView(
@@ -106,14 +109,18 @@ class PopularFragment : Fragment() {
         initAdapter(root)
 
         activity?.findViewById<TextView>(R.id.actionTitle)?.text = "Popular"
-        setHeaderImage(R.drawable.popularanime)
+        setHeaderImages()
+        enableSearchFunction()
 
         viewModel.refreshAllShows()
 
         viewModel.observeShows().observe(this, Observer {
-            submitShows(it, showAdapter)
+            viewModel.observeSearchShows(it)
         })
 
+        viewModel.getSearchShows().observe(this, Observer {
+            submitShows(it, showAdapter)
+        })
         return root
     }
 }

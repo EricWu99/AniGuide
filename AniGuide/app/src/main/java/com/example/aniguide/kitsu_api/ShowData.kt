@@ -36,12 +36,25 @@ data class Attributes (
 	@SerializedName("status") val status : String,
 	@SerializedName("tba") val tba : String,
 	@SerializedName("posterImage") val posterImage : PosterImage,
+	@SerializedName("coverImage") val coverImage : CoverImage,
 	@SerializedName("episodeCount") val episodeCount : Int,
 	@SerializedName("episodeLength") val episodeLength : Int,
 	@SerializedName("totalLength") val totalLength : Int,
 	@SerializedName("youtubeVideoId") val youtubeVideoId : String,
 	@SerializedName("showType") val showType : String,
 	@SerializedName("nsfw") val nsfw : Boolean
+){
+	fun getShowFields(): String {
+
+		return "$canonicalTitle ${titles.en} ${titles.en_jp} ${titles.en_jp} $synopsis"
+	}
+}
+
+data class Titles (
+
+	@SerializedName("en") val en : String,
+	@SerializedName("en_jp") val en_jp : String,
+	@SerializedName("ja_jp") val ja_jp : String
 )
 
 data class PosterImage (
@@ -53,9 +66,12 @@ data class PosterImage (
 	@SerializedName("original") val original : String
 )
 
-data class Titles (
+data class CoverImage (
 
-	@SerializedName("en") val en : String,
-	@SerializedName("en_jp") val en_jp : String,
-	@SerializedName("ja_jp") val ja_jp : String
+	@SerializedName("tiny") val tiny : String,
+	@SerializedName("small") val small : String,
+	@SerializedName("medium") val medium : String,
+	@SerializedName("large") val large : String,
+	@SerializedName("original") val original : String
 )
+
