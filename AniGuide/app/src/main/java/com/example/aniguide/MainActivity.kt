@@ -77,7 +77,6 @@ class MainActivity : AppCompatActivity(){
     override fun onBackPressed() {
         supportFragmentManager.popBackStack()
         findViewById<AppBarLayout>(R.id.appbar_layout)?.setExpanded(false)
-        findViewById<AppBarLayout>(R.id.appbar_layout)?.minimumHeight = 10
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
