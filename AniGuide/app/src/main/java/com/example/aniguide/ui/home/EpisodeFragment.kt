@@ -26,6 +26,13 @@ class EpisodeFragment : Fragment() {
     private lateinit var viewModel: EpisodeViewModel
     private lateinit var episodeAdapter: EpisodeListAdapter
 
+    private fun setAppbarImage(value: String)
+    {
+        val appbarImage = activity?.findViewById<ImageView>(R.id.appbar_image)
+        if(appbarImage?.drawable != null)
+            Glide.glideFetch("$value", "$value", appbarImage!!)
+    }
+
     private fun submitEpisodes(episode: List<Episode>, adapter: EpisodeListAdapter) {
 
         adapter.submitEpisodes(episode)
@@ -34,7 +41,7 @@ class EpisodeFragment : Fragment() {
     private fun initAdapter(root: View) {
 
         val main = root.findViewById<RecyclerView>(R.id.epShowList)
-        episodeAdapter = EpisodeListAdapter(viewModel)
+        episodeAdapter = EpisodeListAdapter(viewModel) { value -> setAppbarImage(value) }
 
         main.adapter = episodeAdapter
         main.layoutManager = LinearLayoutManager(context)

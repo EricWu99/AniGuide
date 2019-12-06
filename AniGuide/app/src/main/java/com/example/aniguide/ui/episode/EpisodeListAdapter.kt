@@ -13,7 +13,8 @@ import com.example.aniguide.tmdb_api.Episode
 import com.example.aniguide.glide.Glide
 
 
-class EpisodeListAdapter(private val viewModel: EpisodeViewModel) : ListAdapter<Episode, EpisodeListAdapter.VH>(Diff()) {
+class EpisodeListAdapter(private val viewModel: EpisodeViewModel,
+                         private val setAppbarImage: (value: String)->Unit ) : ListAdapter<Episode, EpisodeListAdapter.VH>(Diff()) {
 
     private var episodes = listOf<Episode>()
 
@@ -34,6 +35,8 @@ class EpisodeListAdapter(private val viewModel: EpisodeViewModel) : ListAdapter<
             if(item.still_path == null) {
                 descr.text = "Coming Soon"
             }
+            setAppbarImage("https://image.tmdb.org/t/p/w500${item.still_path}")
+
 
             title.setOnClickListener {
                 EpisodeViewModel.showMoreInfo(it.context, item)

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.SearchView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -13,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.example.aniguide.MainActivity
 import com.example.aniguide.R
 import com.example.aniguide.kitsu_api.Data
 import com.example.aniguide.ui.show.ShowViewModel
@@ -50,6 +52,21 @@ class FallFragment : Fragment() {
         adapter.submitShows(shows)
     }
 
+    private fun enableSearchFunction() {
+
+        activity?.findViewById<SearchView>(R.id.actionSearch)?.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+
+            override fun onQueryTextChange(value: String?): Boolean {
+                viewModel.updateSearchTerm(value.toString())
+                if(value.toString() == "") (activity as MainActivity).hideKeyboard()
+                return true
+            }
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+        })
+    }
+
     private fun initAdapter(root: View) {
 
         val main = root.findViewById<RecyclerView>(R.id.fallShowList)
@@ -79,7 +96,7 @@ class FallFragment : Fragment() {
         headerImage?.setImageResource(R.drawable.fallanimee)
 
         val appbarImage = activity?.findViewById<ImageView>(R.id.appbar_image)
-        appbarImage?.setImageResource(R.drawable.fallanimee)
+        appbarImage?.setImageResource(R.drawable.fallscene)
     }
 
     override fun onCreateView(
@@ -95,13 +112,17 @@ class FallFragment : Fragment() {
         viewModel.updateSeason("fall")
         activity?.findViewById<TextView>(R.id.actionTitle)?.text = "Fall"
         setHeaderImages()
+        enableSearchFunction()
 
         viewModel.refreshSeasonalShows()
 
         viewModel.observeShows().observe(this, Observer {
-            submitShows(it, showAdapter)
+            viewModel.observeSearchShows(it)
         })
 
+        viewModel.getSearchShows().observe(this, Observer {
+            submitShows(it, showAdapter)
+        })
         return root
     }
 }

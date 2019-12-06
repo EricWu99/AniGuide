@@ -94,7 +94,7 @@ class PopularFragment : Fragment() {
         headerImage?.setImageResource(R.drawable.popularanime)
 
         val appbarImage = activity?.findViewById<ImageView>(R.id.appbar_image)
-        appbarImage?.setImageResource(R.drawable.popularanime)
+        appbarImage?.setImageResource(R.drawable.popularscene)
     }
 
     override fun onCreateView(
