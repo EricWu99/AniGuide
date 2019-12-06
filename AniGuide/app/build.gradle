@@ -72,7 +72,4 @@ dependencies {
     //Rate app
     implementation 'io.github.kobakei:ratethisapp:1.2.0'
 
-    //Floating Action Buttons
-    //implementation 'com.github.wangjiegulu:rfab:2.0.0'
-
 }
