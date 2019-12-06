@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:layout_height="wrap_content" >
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/summerShowList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/summerSwipeRefreshLayout" >
+        android:background="@color/colorSummer" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/summerShowList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorSummer" />
-
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-</LinearLayout>
+</FrameLayout>

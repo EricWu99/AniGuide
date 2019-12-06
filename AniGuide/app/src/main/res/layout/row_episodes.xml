@@ -15,11 +15,11 @@
         android:background="@color/colorPrimaryDark" >
 
         <ImageView
+            android:id="@+id/ep_image"
             android:layout_width="140dp"
             android:layout_height="105dp"
             android:layout_gravity="center_vertical|start"
             android:scaleType="centerCrop"
-            android:id="@+id/ep_image"
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
             android:paddingTop="5dp"

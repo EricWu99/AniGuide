@@ -11,10 +11,8 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.aniguide.MainActivity
 import com.example.aniguide.R
 import com.example.aniguide.kitsu_api.Data
 import com.example.aniguide.ui.show.ShowViewModel
@@ -72,16 +70,6 @@ class FallFragment : Fragment() {
         })
     }
 
-    private fun initSwipeLayout(root: View) {
-
-        val swipe = root.findViewById<SwipeRefreshLayout>(R.id.fallSwipeRefreshLayout)
-        swipe.setOnRefreshListener {
-            viewModel.updateOffset(true)
-            viewModel.resetSeasonal()
-            swipe.isRefreshing = false
-        }
-    }
-
     private fun setHeaderImage(image: Int)
     {
         val navView = activity?.findViewById<NavigationView>(R.id.nav_view)
@@ -99,11 +87,10 @@ class FallFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(ShowViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_fall, container, false)
         initAdapter(root)
-        initSwipeLayout(root)
 
         viewModel.updateSeason("fall")
         activity?.findViewById<TextView>(R.id.actionTitle)?.text = "Fall"
-        setHeaderImage(R.drawable.fallanime)
+        setHeaderImage(R.drawable.fallanimee)
 
         viewModel.refreshSeasonalShows()
 

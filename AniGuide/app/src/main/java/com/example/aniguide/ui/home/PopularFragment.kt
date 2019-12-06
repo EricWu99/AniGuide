@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.SearchView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.example.aniguide.MainActivity
 import com.example.aniguide.R
 import com.example.aniguide.kitsu_api.Data
 import com.example.aniguide.ui.show.ShowListAdapter
@@ -45,9 +47,23 @@ class PopularFragment : Fragment() {
     }
 
     private fun submitShows(shows: List<Data>, adapter: ShowListAdapter) {
-
         adapter.submitShows(shows)
     }
+
+//    private fun enableSearchFunction() {
+//
+//        activity?.findViewById<SearchView>(R.id.actionSearch)?.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+//
+//            override fun onQueryTextChange(value: String?): Boolean {
+//                viewModel.updateSearchTerm(value.toString())
+//                if(value.toString() == "") (activity as MainActivity).hideKeyboard()
+//                return true
+//            }
+//            override fun onQueryTextSubmit(query: String?): Boolean {
+//                return true
+//            }
+//        })
+//    }
 
     private fun initAdapter(root: View) {
 
@@ -70,16 +86,6 @@ class PopularFragment : Fragment() {
         })
     }
 
-    private fun initSwipeLayout(root: View) {
-
-        val swipe = root.findViewById<SwipeRefreshLayout>(R.id.swipeRefreshLayout)
-        swipe.setOnRefreshListener {
-            viewModel.updateOffset(true)
-            viewModel.resetAllShows()
-            swipe.isRefreshing = false
-        }
-    }
-
     private fun setHeaderImage(image: Int)
     {
         val navView = activity?.findViewById<NavigationView>(R.id.nav_view)
@@ -98,7 +104,6 @@ class PopularFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_popular, container, false)
         initAdapter(root)
-        initSwipeLayout(root)
 
         activity?.findViewById<TextView>(R.id.actionTitle)?.text = "Popular"
         setHeaderImage(R.drawable.popularanime)

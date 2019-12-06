@@ -58,16 +58,20 @@ class EpisodeViewModel : ViewModel() {
 
     fun updateSeason()
     {
+        //Default Season
         season.value = "1"
-        var regex = "\\s[1-9]".toRegex()
+        //Check if there is a space+number or space + II... for season clues
+        var regex = "(\\s[1-9])|(\\sII+)".toRegex()
         val match = regex.find(show.value!!.substring(show.value!!.length/2))
-        if(match != null && match.value.length == 2){
-            season.value = match.value.removePrefix(" ")
+        if(match != null){
+            var number = match.value.removePrefix(" ")
+            //If number has II...
+            if(number.toIntOrNull() == null)
+                season.value = number.length.toString()
+            //If number is a numeral
+            else
+                season.value = number
         }
-        //This is a special case in which TMDB editors only gave it 1 season instead of 3
-        if(show.value!!.contains("Bungou"))
-            season.value = "1"
-
     }
 
 

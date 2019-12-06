@@ -1,5 +1,7 @@
 package com.example.aniguide.ui.send
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +28,17 @@ class SendFragment : Fragment() {
         sendViewModel.text.observe(this, Observer {
             textView.text = it
         })
+
+        //https://stackoverflow.com/questions/3312438/how-to-open-email-program-via-intents-but-only-an-email-program
+        var emailIntent = Intent(Intent.ACTION_SEND)
+        emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        emailIntent.setType("vnd.android.cursor.item/email")
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Ericwu0199@gmail.com");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "\nAniGuide");
+        startActivity(Intent.createChooser(emailIntent, "Send mail using..."));
+
+        fragmentManager!!.popBackStack()
+
         return root
     }
 }

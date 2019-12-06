@@ -71,16 +71,6 @@ class WinterFragment : Fragment() {
         })
     }
 
-    private fun initSwipeLayout(root: View) {
-
-        val swipe = root.findViewById<SwipeRefreshLayout>(R.id.winterSwipeRefreshLayout)
-        swipe.setOnRefreshListener {
-            viewModel.updateOffset(true)
-            viewModel.resetSeasonal()
-            swipe.isRefreshing = false
-        }
-    }
-
     private fun setHeaderImage(image: Int)
     {
         val navView = activity?.findViewById<NavigationView>(R.id.nav_view)
@@ -98,7 +88,6 @@ class WinterFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(ShowViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_winter, container, false)
         initAdapter(root)
-        initSwipeLayout(root)
 
         viewModel.updateSeason("winter")
         activity?.findViewById<TextView>(R.id.actionTitle)?.text = "Winter"

@@ -1,7 +1,6 @@
 package com.example.aniguide.tmdb_api
 
 class TMDBRepository(private val TMDBApi: TMDBApi) {
-
     suspend fun getSeriesID(title: String): String {
         var searchTitle = title.toLowerCase()
 
@@ -20,9 +19,9 @@ class TMDBRepository(private val TMDBApi: TMDBApi) {
             searchTitle = title.substring(0,indexOfColon)
         }
 
-        var regex = "[1-9]".toRegex()
+        var regex =  "(\\s[1-9])|(\\sii+)".toRegex()
         val match = regex.find(searchTitle.substring(searchTitle.length/2))
-        if(match != null && match.value.length == 1){
+        if(match != null){
             searchTitle = searchTitle.substringBeforeLast(match.value)
         }
 
@@ -33,12 +32,21 @@ class TMDBRepository(private val TMDBApi: TMDBApi) {
         return totalResultsList.results[0].id.toString()
     }
 
-    suspend fun getSeason(title: String, season: String): List<Episode>{
-
-        if(this.getSeriesID(title) == "")
-            return listOf() //Nothing
-
-        return TMDBApi.getSeason(getSeriesID(title),season).episode
+    suspend fun getNumSeasons(titleID: String): Int{
+        return TMDBApi.getNumSeasons(titleID).number_of_seasons
     }
+
+    suspend fun getSeason(title: String, season: String): List<Episode>{
+        var titleID = this.getSeriesID(title)
+        if(titleID == "")
+            return listOf() //Nothing
+        //Incase we Kitsu says the season is X but TMDB lists them differently (All seasons as 1) so default to 1
+        var numSeasons = getNumSeasons(titleID)
+        if(season.toInt() <= numSeasons)
+            return TMDBApi.getSeason(titleID,season).episode
+        else
+            return TMDBApi.getSeason(titleID,"1").episode
+    }
+
 }
 

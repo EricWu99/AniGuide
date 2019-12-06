@@ -34,6 +34,10 @@ class EpisodeListAdapter(private val viewModel: EpisodeViewModel)
             Glide.glideFetch("https://image.tmdb.org/t/p/w500${item.still_path}",
                 "https://image.tmdb.org/t/p/w500${item.still_path}", image)
 
+            if(item.still_path == null) {
+                descr.text = "Coming Soon"
+            }
+
             title.setOnClickListener {
                 EpisodeViewModel.showMoreInfo(it.context, item)
             }

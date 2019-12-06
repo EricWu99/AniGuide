@@ -40,16 +40,6 @@ class EpisodeFragment : Fragment() {
 
     }
 
-    private fun initSwipeLayout(root: View) {
-
-        val swipe = root.findViewById<SwipeRefreshLayout>(R.id.epSwipeRefreshLayout)
-        swipe.setOnRefreshListener {
-
-            viewModel.refreshEpisodes()
-            swipe.isRefreshing = false
-        }
-    }
-
     private fun setActionTitle(value: String)
     {
         activity?.findViewById<TextView>(R.id.actionTitle)?.text = value.replace("+", " ")
@@ -81,7 +71,6 @@ class EpisodeFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_episodes, container, false)
         initAdapter(root)
-        initSwipeLayout(root)
 
         val selectedShow = arguments!!.getString(PopularFragment.show_key)!!
         viewModel.updateShow(selectedShow)

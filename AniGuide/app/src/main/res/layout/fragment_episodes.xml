@@ -1,44 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/epLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:layout_height="wrap_content" >
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/epShowList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/epSwipeRefreshLayout" >
+        android:background="@android:color/black" />
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:orientation="vertical">-->
-
-<!--            <FrameLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="200dp"-->
-<!--                >-->
-
-
-
-
-<!--            </FrameLayout>-->
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/epShowList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/black" />
-
-<!--        </LinearLayout>-->
-
-
-
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-</LinearLayout>
+</FrameLayout>
 
 
 

@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.aniguide.kitsu_api.Data
 import com.example.aniguide.kitsu_api.KitsuApi
 import com.example.aniguide.kitsu_api.KitsuRepository
+import com.example.aniguide.tmdb_api.Episode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -23,7 +24,8 @@ class ShowViewModel : ViewModel() {
     private val selectedShow = MutableLiveData<String>()
     private val shows = MutableLiveData<List<Data>>().apply { value = ArrayList() }
 
-    val maxLimit = 20
+    private val maxLimit = 20
+
 
     fun observeShows(): LiveData<List<Data>> {
         return shows

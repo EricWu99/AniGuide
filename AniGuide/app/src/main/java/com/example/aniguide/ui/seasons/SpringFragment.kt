@@ -71,16 +71,6 @@ class SpringFragment : Fragment() {
         })
     }
 
-    private fun initSwipeLayout(root: View) {
-
-        val swipe = root.findViewById<SwipeRefreshLayout>(R.id.springSwipeRefreshLayout)
-        swipe.setOnRefreshListener {
-            viewModel.updateOffset(true)
-            viewModel.resetSeasonal()
-            swipe.isRefreshing = false
-        }
-    }
-
     private fun setHeaderImage(image: Int)
     {
         val navView = activity?.findViewById<NavigationView>(R.id.nav_view)
@@ -98,7 +88,6 @@ class SpringFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(ShowViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_spring, container, false)
         initAdapter(root)
-        initSwipeLayout(root)
 
         viewModel.updateSeason("spring")
         activity?.findViewById<TextView>(R.id.actionTitle)?.text = "Spring"

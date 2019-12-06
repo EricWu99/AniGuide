@@ -14,9 +14,10 @@ import android.view.Menu
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.ActionBar
+import com.kobakei.ratethisapp.RateThisApp
 import kotlinx.android.synthetic.main.action_bar.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
@@ -31,6 +32,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+        RateThisApp.onCreate(this)
+        val config = RateThisApp.Config(1,1)
+        config.setMessage(R.string.rate_title)
+        RateThisApp.init(config)
+
+        //Change to every x times after presentation
+        RateThisApp.showRateDialog(this)
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
