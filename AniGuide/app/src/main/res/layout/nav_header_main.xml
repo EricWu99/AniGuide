@@ -8,11 +8,27 @@
     android:orientation="vertical"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <ImageView
-        android:id="@+id/navImage"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/popularanime"
-        android:scaleType="fitXY"/>
+        android:layout_height="match_parent" >
+
+        <ImageView
+            android:id="@+id/navImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/popularanime"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:text="@string/app_name"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:padding="15dp" />
+
+    </FrameLayout>
+
 
 </LinearLayout>
