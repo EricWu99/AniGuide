@@ -52,7 +52,6 @@ class MoreInfo : AppCompatActivity() {
         ep_air_date.text = "Aired on ${intent.getStringExtra(EpisodeViewModel.air_date_key)}"
         ep_vote_average.text = "Voted ${intent.getFloatExtra(EpisodeViewModel.vote_avg_key, 0f)}/10.0" +
                 " by ${intent.getIntExtra(EpisodeViewModel.vote_count_key, 0)} users"
-
     }
 
     fun backButton(view: View) {
@@ -63,5 +62,4 @@ class MoreInfo : AppCompatActivity() {
 
         finish()
     }
-
 }

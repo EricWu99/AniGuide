@@ -37,7 +37,6 @@ class ShowViewModel : ViewModel() {
     fun updateSearchTerm(value: String)
     {
         searchTerm.postValue(value)
-        Log.d("XXX", "$value")
     }
 
     private fun filterEpisodes(list: List<Data>): List<Data>
@@ -100,7 +99,7 @@ class ShowViewModel : ViewModel() {
         context = viewModelScope.coroutineContext
                 + Dispatchers.IO) {
         if(!shows.value.isNullOrEmpty()) {
-            var show = shows.value!!.toMutableList()
+            val show = shows.value!!.toMutableList()
             show.addAll(show.size , repo.getSeasonalShows(season.value!!, year.value!!, offset.value!!))
             shows.postValue(show)
         }
@@ -111,7 +110,7 @@ class ShowViewModel : ViewModel() {
         context = viewModelScope.coroutineContext
                 + Dispatchers.IO) {
         if(!shows.value.isNullOrEmpty()) {
-            var show = shows.value!!.toMutableList()
+            val show = shows.value!!.toMutableList()
             show.addAll(show.size ,repo.getAllShows(year.value!!, offset.value!!))
             shows.postValue(show)
         }

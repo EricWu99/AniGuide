@@ -4,8 +4,8 @@ class TMDBRepository(private val TMDBApi: TMDBApi) {
     suspend fun getSeriesID(title: String): String {
         var searchTitle = title.toLowerCase()
 
-        var indexOfSeason = searchTitle.indexOf("season")
-        var indexOfColon = searchTitle.indexOf(":")
+        val indexOfSeason = searchTitle.indexOf("season")
+        val indexOfColon = searchTitle.indexOf(":")
 
         var totalResultsList = TMDBApi.searchShow(searchTitle)
         //If the current title works
@@ -19,7 +19,7 @@ class TMDBRepository(private val TMDBApi: TMDBApi) {
             searchTitle = title.substring(0,indexOfColon)
         }
 
-        var regex =  "(\\s[1-9])|(\\sii+)".toRegex()
+        val regex =  "(\\s[1-9])|(\\sii+)".toRegex()
         val match = regex.find(searchTitle.substring(searchTitle.length/2))
         if(match != null){
             searchTitle = searchTitle.substringBeforeLast(match.value)
@@ -37,11 +37,11 @@ class TMDBRepository(private val TMDBApi: TMDBApi) {
     }
 
     suspend fun getSeason(title: String, season: String): List<Episode>{
-        var titleID = this.getSeriesID(title)
+        val titleID = this.getSeriesID(title)
         if(titleID == "")
             return listOf() //Nothing
         //Incase we Kitsu says the season is X but TMDB lists them differently (All seasons as 1) so default to 1
-        var numSeasons = getNumSeasons(titleID)
+        val numSeasons = getNumSeasons(titleID)
         if(season.toInt() <= numSeasons)
             return TMDBApi.getSeason(titleID,season).episode
         else

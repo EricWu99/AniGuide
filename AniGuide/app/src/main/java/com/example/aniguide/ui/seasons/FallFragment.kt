@@ -28,7 +28,7 @@ class FallFragment : Fragment() {
     private lateinit var viewModel: ShowViewModel
     private lateinit var showAdapter: ShowListAdapter
 
-    companion object{
+    companion object {
         const val show_key = "show_key"
     }
 
@@ -54,6 +54,7 @@ class FallFragment : Fragment() {
 
     private fun enableSearchFunction() {
 
+        activity?.findViewById<SearchView>(R.id.actionSearch)?.setQuery("", true)
         activity?.findViewById<SearchView>(R.id.actionSearch)?.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
 
             override fun onQueryTextChange(value: String?): Boolean {

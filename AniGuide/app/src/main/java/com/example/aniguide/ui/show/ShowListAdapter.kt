@@ -39,7 +39,6 @@ class ShowListAdapter(private val viewModel: ShowViewModel,
                 viewModel.updateSelectedShow(item.attributes.canonicalTitle)
                 openEpisodeList()
             }
-
         }
     }
 
@@ -71,6 +70,5 @@ class ShowListAdapter(private val viewModel: ShowViewModel,
                     && oldItem.data.attributes.synopsis == newItem.data.attributes.synopsis
         }
     }
-
 }
 

@@ -51,16 +51,6 @@ class EpisodeViewModel : ViewModel() {
         return searchEpisodes
     }
 
-    fun getShowCover(): String
-    {
-        return episodes.value!![0].still_path!!
-    }
-
-    fun updateShow(value: String)
-    {
-        show.value = value
-    }
-
     fun updateSeason()
     {
         //Default Season
@@ -77,6 +67,11 @@ class EpisodeViewModel : ViewModel() {
             else
                 season.value = number
         }
+    }
+
+    fun updateShow(value: String)
+    {
+        show.value = value
     }
 
     fun observeShow(): LiveData<String> {

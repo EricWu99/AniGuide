@@ -14,6 +14,8 @@ import android.view.Menu
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.ActionBar
+import com.example.aniguide.ui.home.EpisodeFragment
+import com.google.android.material.appbar.AppBarLayout
 import com.kobakei.ratethisapp.RateThisApp
 import kotlinx.android.synthetic.main.action_bar.*
 
@@ -32,7 +34,6 @@ class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
 
         RateThisApp.onCreate(this)
         val config = RateThisApp.Config(1,1)
@@ -75,6 +76,8 @@ class MainActivity : AppCompatActivity(){
 
     override fun onBackPressed() {
         supportFragmentManager.popBackStack()
+        findViewById<AppBarLayout>(R.id.appbar_layout)?.setExpanded(false)
+        findViewById<AppBarLayout>(R.id.appbar_layout)?.minimumHeight = 10
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

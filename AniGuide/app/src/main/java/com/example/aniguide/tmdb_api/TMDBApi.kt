@@ -19,7 +19,6 @@ interface TMDBApi {
     suspend fun getNumSeasons(@Path("id") id: String): TMDBShowMeta
 
     @GET("/3/tv/{id}/season/{season}?api_key=ba626da3057b248f95ac15ff17f03268")
-    //https://api.themoviedb.org/3/tv/65930/season/4?api_key=ba626da3057b248f95ac15ff17f03268
     suspend fun getSeason(@Path("id") id: String, @Path("season") season: String): TMDBSeasonMeta
 
     companion object {

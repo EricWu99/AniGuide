@@ -32,11 +32,10 @@ class EpisodeListAdapter(private val viewModel: EpisodeViewModel,
             Glide.glideFetch("https://image.tmdb.org/t/p/w500${item.still_path}",
                 "https://image.tmdb.org/t/p/w500${item.still_path}", image)
 
-            if(item.still_path == null) {
+            if(item.still_path == null)
                 descr.text = "Coming Soon"
-            }
-            setAppbarImage("https://image.tmdb.org/t/p/w500${item.still_path}")
 
+            setAppbarImage("https://image.tmdb.org/t/p/w500${episodes[0].still_path}")
 
             title.setOnClickListener {
                 EpisodeViewModel.showMoreInfo(it.context, item)
@@ -77,6 +76,5 @@ class EpisodeListAdapter(private val viewModel: EpisodeViewModel,
             return oldItem.name == newItem.name && oldItem.overview == newItem.overview
         }
     }
-
 }
 

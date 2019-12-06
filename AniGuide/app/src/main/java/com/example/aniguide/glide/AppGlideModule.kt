@@ -17,7 +17,6 @@ import com.example.aniguide.R
 @GlideModule
 class AppGlideModule : AppGlideModule() {
     override fun applyOptions(context: Context, builder: GlideBuilder) {
-        // You can change this (start by just commenting it out) to make Glide more verbose
         builder.setLogLevel(Log.ERROR)
     }
     override fun isManifestParsingEnabled(): Boolean {
@@ -25,18 +24,12 @@ class AppGlideModule : AppGlideModule() {
     }
 }
 
-// Calling glideapp.with with the most specific Activity/Fragment
-// context allows it to track lifecycles for your fetch
 // https://stackoverflow.com/questions/31964737/glide-image-loading-with-application-context
 object Glide {
     private val width = Resources.getSystem().displayMetrics.widthPixels
     private val height = Resources.getSystem().displayMetrics.heightPixels
     private var glideOptions = RequestOptions ()
-        // Options like CenterCrop are possible, but I like this one best
-        // Evidently you need fitCenter or dontTransform.  If you use centerCrop, your
-        // list disappears.  I think that was an old bug.
         .fitCenter()
-        // Rounded corners are so lovely.
         .transform(RoundedCorners (20))
 
     private fun fromHtml(source: String): String {

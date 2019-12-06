@@ -20,6 +20,7 @@ import com.example.aniguide.glide.Glide
 import com.example.aniguide.tmdb_api.Episode
 import com.example.aniguide.ui.episode.EpisodeListAdapter
 import com.example.aniguide.ui.episode.EpisodeViewModel
+import com.google.android.material.appbar.AppBarLayout
 
 class EpisodeFragment : Fragment() {
 
@@ -29,8 +30,7 @@ class EpisodeFragment : Fragment() {
     private fun setAppbarImage(value: String)
     {
         val appbarImage = activity?.findViewById<ImageView>(R.id.appbar_image)
-        if(appbarImage?.drawable != null)
-            Glide.glideFetch("$value", "$value", appbarImage!!)
+        Glide.glideFetch("$value", "$value", appbarImage!!)
     }
 
     private fun submitEpisodes(episode: List<Episode>, adapter: EpisodeListAdapter) {
@@ -54,6 +54,7 @@ class EpisodeFragment : Fragment() {
 
     private fun enableSearchFunction() {
 
+        activity?.findViewById<SearchView>(R.id.actionSearch)?.setQuery("", true)
         activity?.findViewById<SearchView>(R.id.actionSearch)?.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
 
             override fun onQueryTextChange(value: String?): Boolean {
@@ -84,6 +85,7 @@ class EpisodeFragment : Fragment() {
         viewModel.updateSeason()
 
         setActionTitle(viewModel.observeShow().value!!)
+        activity?.findViewById<AppBarLayout>(R.id.appbar_layout)?.setExpanded(true, true)
         enableSearchFunction()
 
         viewModel.observeShow().observe(this, Observer {
