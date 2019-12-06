@@ -5,8 +5,8 @@
     <color name="colorAccent">#ADADAD</color>
 
     <color name="colorPopular">#000000</color>
-    <color name="colorFall">#FFC282</color>
-    <color name="colorWinter">#AFD9E5</color>
-    <color name="colorSpring">#FFD1DC</color>
-    <color name="colorSummer">#FDFD96</color>
+    <color name="colorFall">#E4B25D</color>
+    <color name="colorWinter">#CEE7EF</color>
+    <color name="colorSpring">#F8D6EE</color>
+    <color name="colorSummer">#F6EBBA</color>
 </resources>

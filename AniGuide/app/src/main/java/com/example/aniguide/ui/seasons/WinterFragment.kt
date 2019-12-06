@@ -54,8 +54,10 @@ class WinterFragment : Fragment() {
 
     private fun enableSearchFunction() {
 
-        activity?.findViewById<SearchView>(R.id.actionSearch)?.setQuery("", true)
-        activity?.findViewById<SearchView>(R.id.actionSearch)?.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+        val searchBar = activity?.findViewById<SearchView>(R.id.actionSearch)
+        searchBar?.setQuery("", true)
+        searchBar?.isIconified = true
+        searchBar?.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
 
             override fun onQueryTextChange(value: String?): Boolean {
                 viewModel.updateSearchTerm(value.toString())
